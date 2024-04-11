@@ -15,5 +15,5 @@
 ---
 
 
-⭐ Another great source is the [tutorials on Pytorch website](https://pytorch.org/tutorials/beginner/basics/intro.html).
+⭐ Another excellent source is the [tutorials on Pytorch website](https://pytorch.org/tutorials/beginner/basics/intro.html)
 ---
