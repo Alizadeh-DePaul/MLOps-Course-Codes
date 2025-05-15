@@ -1,1 +1,4 @@
 Exercises-Solutions/Reproducibility/
+mlartifacts/
+mlruns/
+wandb/
