@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/f9edf0270d4b4ff68c985d8b8b1842bb/artifacts
+deleted_time: 1747342982902
+end_time: 1747342667075
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: f9edf0270d4b4ff68c985d8b8b1842bb
+run_name: auspicious-jay-581
+run_uuid: f9edf0270d4b4ff68c985d8b8b1842bb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342659556
+status: 3
+tags: []
+user_id: vahid

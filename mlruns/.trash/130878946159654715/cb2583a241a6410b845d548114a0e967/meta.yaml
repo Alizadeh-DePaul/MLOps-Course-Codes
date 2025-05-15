@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/cb2583a241a6410b845d548114a0e967/artifacts
+deleted_time: 1747342982902
+end_time: 1747342651501
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: cb2583a241a6410b845d548114a0e967
+run_name: bold-mole-44
+run_uuid: cb2583a241a6410b845d548114a0e967
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342643818
+status: 3
+tags: []
+user_id: vahid

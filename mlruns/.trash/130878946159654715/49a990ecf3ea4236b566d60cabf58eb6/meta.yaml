@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/49a990ecf3ea4236b566d60cabf58eb6/artifacts
+deleted_time: 1747342982902
+end_time: 1747342605138
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: 49a990ecf3ea4236b566d60cabf58eb6
+run_name: judicious-moth-588
+run_uuid: 49a990ecf3ea4236b566d60cabf58eb6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342593446
+status: 3
+tags: []
+user_id: vahid

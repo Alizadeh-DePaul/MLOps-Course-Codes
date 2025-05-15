@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/a8555a9f63c34e7d9d972f622227b658/artifacts
+deleted_time: 1747342982902
+end_time: 1747342684298
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: a8555a9f63c34e7d9d972f622227b658
+run_name: carefree-swan-431
+run_uuid: a8555a9f63c34e7d9d972f622227b658
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342675635
+status: 3
+tags: []
+user_id: vahid

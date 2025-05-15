@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/8da276f8f86742b7aaa09df3427d1a83/artifacts
+deleted_time: 1747342982902
+end_time: 1747342620556
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: 8da276f8f86742b7aaa09df3427d1a83
+run_name: gregarious-wasp-669
+run_uuid: 8da276f8f86742b7aaa09df3427d1a83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342613031
+status: 3
+tags: []
+user_id: vahid

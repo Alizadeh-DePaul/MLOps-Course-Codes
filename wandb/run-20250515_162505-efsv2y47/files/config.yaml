@@ -1,0 +1,66 @@
+_wandb:
+    value:
+        cli_version: 0.19.11
+        m: []
+        python_version: 3.13.2
+        t:
+            "1":
+                - 1
+                - 41
+                - 55
+                - 105
+            "2":
+                - 1
+                - 41
+                - 55
+                - 105
+            "3":
+                - 2
+                - 13
+                - 19
+                - 23
+                - 55
+            "4": 3.13.2
+            "5": 0.19.11
+            "8":
+                - 3
+                - 5
+            "12": 0.19.11
+            "13": windows-amd64
+        visualize:
+            confusion_matrix:
+                panel_config:
+                    fieldSettings:
+                        Actual: Actual
+                        Predicted: Predicted
+                        nPredictions: nPredictions
+                    panelDefId: wandb/confusion_matrix/v1
+                    stringSettings:
+                        title: Confusion Matrix Curve
+                    transform:
+                        name: tableWithLeafColNames
+                    userQuery:
+                        queryFields:
+                            - args:
+                                - name: runSets
+                                  value: ${runSets}
+                              fields:
+                                - fields: []
+                                  name: id
+                                - fields: []
+                                  name: name
+                                - fields: []
+                                  name: _defaultColorIndex
+                                - args:
+                                    - name: tableKey
+                                      value: confusion_matrix_table
+                                  fields: []
+                                  name: summaryTable
+                              name: runSets
+                panel_type: Vega2
+batch_size:
+    value: 64
+epochs:
+    value: 10
+learning_rate:
+    value: 0.01

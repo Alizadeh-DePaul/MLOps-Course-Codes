@@ -1,0 +1,16 @@
+artifact_uri: file:E:/OneDrive - DePaul University/@D/@DePaul/Courses/SE 489/Codes/MLOps-Course-Codes/mlruns/889881340734490330/61ac95277ce549d1863ac61496bc9203/artifacts
+deleted_time: 1747342985654
+end_time: 1747341892145
+entry_point_name: ''
+experiment_id: '889881340734490330'
+lifecycle_stage: deleted
+run_id: 61ac95277ce549d1863ac61496bc9203
+run_name: basic-logistic-regression
+run_uuid: 61ac95277ce549d1863ac61496bc9203
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747341879894
+status: 3
+tags: []
+user_id: vahid

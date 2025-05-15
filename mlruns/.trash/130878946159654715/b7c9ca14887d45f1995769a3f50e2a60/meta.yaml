@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/b7c9ca14887d45f1995769a3f50e2a60/artifacts
+deleted_time: 1747342982902
+end_time: 1747342760256
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: b7c9ca14887d45f1995769a3f50e2a60
+run_name: delightful-chimp-422
+run_uuid: b7c9ca14887d45f1995769a3f50e2a60
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342751375
+status: 3
+tags: []
+user_id: vahid

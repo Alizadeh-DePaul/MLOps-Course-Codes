@@ -1,0 +1,5 @@
+# Build the image
+docker build -t my-wandb-experiment -f wandb.dockerfile .
+
+# Run with your API key
+docker run -e WANDB_API_KEY=your_api_key_here my-wandb-experiment

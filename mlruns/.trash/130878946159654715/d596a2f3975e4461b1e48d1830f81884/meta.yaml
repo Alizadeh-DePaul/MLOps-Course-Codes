@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/d596a2f3975e4461b1e48d1830f81884/artifacts
+deleted_time: 1747342982902
+end_time: 1747342751270
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: d596a2f3975e4461b1e48d1830f81884
+run_name: upbeat-yak-98
+run_uuid: d596a2f3975e4461b1e48d1830f81884
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342742136
+status: 3
+tags: []
+user_id: vahid

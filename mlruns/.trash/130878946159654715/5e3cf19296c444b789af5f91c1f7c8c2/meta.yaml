@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/130878946159654715/5e3cf19296c444b789af5f91c1f7c8c2/artifacts
+deleted_time: 1747342982902
+end_time: 1747342701491
+entry_point_name: ''
+experiment_id: '130878946159654715'
+lifecycle_stage: deleted
+run_id: 5e3cf19296c444b789af5f91c1f7c8c2
+run_name: burly-shrew-693
+run_uuid: 5e3cf19296c444b789af5f91c1f7c8c2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747342693304
+status: 3
+tags: []
+user_id: vahid

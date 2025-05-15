@@ -1,0 +1,35 @@
+_wandb:
+    value:
+        cli_version: 0.19.11
+        m: []
+        python_version: 3.13.2
+        t:
+            "1":
+                - 1
+                - 41
+                - 55
+                - 105
+            "2":
+                - 1
+                - 41
+                - 55
+                - 105
+            "3":
+                - 2
+                - 13
+                - 19
+                - 23
+                - 55
+            "4": 3.13.2
+            "5": 0.19.11
+            "8":
+                - 3
+                - 5
+            "12": 0.19.11
+            "13": windows-amd64
+batch_size:
+    value: 64
+epochs:
+    value: 10
+learning_rate:
+    value: 0.01

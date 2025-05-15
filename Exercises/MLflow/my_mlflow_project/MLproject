@@ -1,0 +1,11 @@
+name: iris_classification_project
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      solver: {type: string, default: "lbfgs"}
+      C: {type: float, default: 1.0}
+      max_iter: {type: int, default: 100}
+    command: "python train.py --solver {solver} --C {C} --max_iter {max_iter}"

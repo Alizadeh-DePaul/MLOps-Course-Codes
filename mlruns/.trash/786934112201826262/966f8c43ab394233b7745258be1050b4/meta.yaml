@@ -1,0 +1,16 @@
+artifact_uri: file:///E:/OneDrive%20-%20DePaul%20University/%40D/%40DePaul/Courses/SE%20489/Codes/MLOps-Course-Codes/mlruns/786934112201826262/966f8c43ab394233b7745258be1050b4/artifacts
+deleted_time: 1747341012363
+end_time: 1747339284604
+entry_point_name: ''
+experiment_id: '786934112201826262'
+lifecycle_stage: deleted
+run_id: 966f8c43ab394233b7745258be1050b4
+run_name: rf-10-3
+run_uuid: 966f8c43ab394233b7745258be1050b4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747339273213
+status: 3
+tags: []
+user_id: vahid

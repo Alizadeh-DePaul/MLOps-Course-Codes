@@ -1,0 +1,36 @@
+2025-05-15 16:25:05,355 INFO    MainThread:54160 [wandb_setup.py:_flush():70] Current SDK version is 0.19.11
+2025-05-15 16:25:05,356 INFO    MainThread:54160 [wandb_setup.py:_flush():70] Configure stats pid to 54160
+2025-05-15 16:25:05,356 INFO    MainThread:54160 [wandb_setup.py:_flush():70] Loading settings from C:\Users\vahid\.config\wandb\settings
+2025-05-15 16:25:05,356 INFO    MainThread:54160 [wandb_setup.py:_flush():70] Loading settings from E:\OneDrive - DePaul University\@D\@DePaul\Courses\SE 489\Codes\MLOps-Course-Codes\wandb\settings
+2025-05-15 16:25:05,356 INFO    MainThread:54160 [wandb_setup.py:_flush():70] Loading settings from environment variables
+2025-05-15 16:25:05,356 INFO    MainThread:54160 [wandb_init.py:setup_run_log_directory():724] Logging user logs to E:\OneDrive - DePaul University\@D\@DePaul\Courses\SE 489\Codes\MLOps-Course-Codes\wandb\run-20250515_162505-efsv2y47\logs\debug.log
+2025-05-15 16:25:05,356 INFO    MainThread:54160 [wandb_init.py:setup_run_log_directory():725] Logging internal logs to E:\OneDrive - DePaul University\@D\@DePaul\Courses\SE 489\Codes\MLOps-Course-Codes\wandb\run-20250515_162505-efsv2y47\logs\debug-internal.log
+2025-05-15 16:25:05,357 INFO    MainThread:54160 [wandb_init.py:init():852] calling init triggers
+2025-05-15 16:25:05,357 INFO    MainThread:54160 [wandb_init.py:init():857] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-05-15 16:25:05,357 INFO    MainThread:54160 [wandb_init.py:init():893] starting backend
+2025-05-15 16:25:05,357 INFO    MainThread:54160 [wandb_init.py:init():897] sending inform_init request
+2025-05-15 16:25:05,423 INFO    MainThread:54160 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2025-05-15 16:25:05,423 INFO    MainThread:54160 [wandb_init.py:init():907] backend started and connected
+2025-05-15 16:25:05,424 INFO    MainThread:54160 [wandb_init.py:init():1005] updated telemetry
+2025-05-15 16:25:05,541 INFO    MainThread:54160 [wandb_init.py:init():1029] communicating run to backend with 90.0 second timeout
+2025-05-15 16:25:05,889 INFO    MainThread:54160 [wandb_init.py:init():1104] starting run threads in backend
+2025-05-15 16:25:06,202 INFO    MainThread:54160 [wandb_run.py:_console_start():2573] atexit reg
+2025-05-15 16:25:06,203 INFO    MainThread:54160 [wandb_run.py:_redirect():2421] redirect: wrap_raw
+2025-05-15 16:25:06,207 INFO    MainThread:54160 [wandb_run.py:_redirect():2490] Wrapping output streams.
+2025-05-15 16:25:06,207 INFO    MainThread:54160 [wandb_run.py:_redirect():2513] Redirects installed.
+2025-05-15 16:25:06,212 INFO    MainThread:54160 [wandb_init.py:init():1150] run started, returning control to user process
+2025-05-15 16:25:06,213 INFO    MainThread:54160 [wandb_config.py:__setitem__():154] [no run ID] config set batch_size = 64 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x000001F249A80980>>
+2025-05-15 16:25:06,213 INFO    MainThread:54160 [wandb_run.py:_config_callback():1436] config_cb batch_size 64 None
+2025-05-15 16:25:06,213 INFO    MainThread:54160 [wandb_config.py:__setitem__():154] [no run ID] config set learning_rate = 0.01 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x000001F249A80980>>
+2025-05-15 16:25:06,213 INFO    MainThread:54160 [wandb_run.py:_config_callback():1436] config_cb learning_rate 0.01 None
+2025-05-15 16:25:06,213 INFO    MainThread:54160 [wandb_config.py:__setitem__():154] [no run ID] config set epochs = 10 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x000001F249A80980>>
+2025-05-15 16:25:06,213 INFO    MainThread:54160 [wandb_run.py:_config_callback():1436] config_cb epochs 10 None
+2025-05-15 16:26:16,378 INFO    MainThread:54160 [wandb_run.py:_config_callback():1436] config_cb ('_wandb', 'visualize', 'confusion_matrix') {'panel_type': 'Vega2', 'panel_config': {'panelDefId': 'wandb/confusion_matrix/v1', 'fieldSettings': {'Actual': 'Actual', 'Predicted': 'Predicted', 'nPredictions': 'nPredictions'}, 'stringSettings': {'title': 'Confusion Matrix Curve'}, 'transform': {'name': 'tableWithLeafColNames'}, 'userQuery': {'queryFields': [{'name': 'runSets', 'args': [{'name': 'runSets', 'value': '${runSets}'}], 'fields': [{'name': 'id', 'fields': []}, {'name': 'name', 'fields': []}, {'name': '_defaultColorIndex', 'fields': []}, {'name': 'summaryTable', 'args': [{'name': 'tableKey', 'value': 'confusion_matrix_table'}], 'fields': []}]}]}}} None
+2025-05-15 16:26:16,574 INFO    MainThread:54160 [wandb_run.py:_finish():2321] finishing run depaul-mlops/my-awesome-project/efsv2y47
+2025-05-15 16:26:16,574 INFO    MainThread:54160 [wandb_run.py:_atexit_cleanup():2538] got exitcode: 0
+2025-05-15 16:26:16,574 INFO    MainThread:54160 [wandb_run.py:_restore():2520] restore
+2025-05-15 16:26:16,574 INFO    MainThread:54160 [wandb_run.py:_restore():2526] restore done
+2025-05-15 16:26:17,525 INFO    MainThread:54160 [wandb_run.py:_footer_history_summary_info():4188] rendering history
+2025-05-15 16:26:17,525 INFO    MainThread:54160 [wandb_run.py:_footer_history_summary_info():4220] rendering summary
+2025-05-15 16:26:17,525 INFO    MainThread:54160 [wandb_run.py:_footer_sync_info():4149] logging synced files
