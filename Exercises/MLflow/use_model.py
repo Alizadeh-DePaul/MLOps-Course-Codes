@@ -7,7 +7,7 @@ from sklearn.datasets import load_iris
 mlflow.set_tracking_uri("http://localhost:5000")
 
 # Load the model by name and version
-model_name = "iris-classifier"
+model_name = "iris-classifier-model-new"
 model_version = 1  # Update with your version
 model = mlflow.pyfunc.load_model(f"models:/{model_name}/{model_version}")
 

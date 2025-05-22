@@ -1,0 +1,24 @@
+ERROR 2025-05-15 18:14:59,380 [__main__:logger_advanced.py:<module>:61]
+Error message: Failed to connect to data source
+
+CRITICAL 2025-05-15 18:14:59,380 [__main__:logger_advanced.py:<module>:62]
+Critical message: Model serving API is down!
+
+ERROR 2025-05-15 18:18:24,634 [__main__:logger_advanced.py:<module>:61]
+Error message: Failed to connect to data source
+
+CRITICAL 2025-05-15 18:18:24,635 [__main__:logger_advanced.py:<module>:62]
+Critical message: Model serving API is down!
+
+ERROR 2025-05-15 18:21:09,585 [__main__:logging_rich.py:<module>:66]
+[bold red]Error:[/bold red] Failed to save model weights to S3
+
+CRITICAL 2025-05-15 18:21:09,587 [__main__:logging_rich.py:<module>:67]
+[bold white on red]CRITICAL:[/bold white on red] Out of memory during batch processing
+
+ERROR 2025-05-15 18:21:12,625 [__main__:logging_rich.py:<module>:97]
+Failed to load pretrained weights
+Traceback (most recent call last):
+  File "e:\OneDrive - DePaul University\@D\@DePaul\Courses\SE 489\Codes\MLOps-Course-Codes\Exercises\ApplicationLogging\logging_rich.py", line 95, in <module>
+    raise FileNotFoundError("Pretrained model file not found")
+FileNotFoundError: Pretrained model file not found

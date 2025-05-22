@@ -6,7 +6,7 @@ import torch.nn as nn
 import torchvision
 
 # 1. Start a new run
-wandb.init(project="my-awesome-project", name="advanced-experiment")
+wandb.init(project="Week7-project", entity="WANDB USERNAME" name="Week7-experiment-advanced")
 
 # 2. Configure model and training parameters
 config = wandb.config  # Initialize config

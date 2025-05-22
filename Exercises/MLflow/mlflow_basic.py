@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 mlflow.set_tracking_uri("file:./mlruns")
 
 # Set the experiment name
-mlflow.set_experiment("iris-classification1")
+mlflow.set_experiment("iris-classification-week7")
 
 # Load data
 iris = load_iris()

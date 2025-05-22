@@ -14,7 +14,7 @@ run_id = sys.argv[1]
 
 # Register the model
 model_uri = f"runs:/{run_id}/model"
-mv = mlflow.register_model(model_uri, "iris-classifier")
+mv = mlflow.register_model(model_uri, "iris-classifier-model-new")
 
 print(f"Model registered with name: {mv.name}")
 print(f"Model version: {mv.version}")

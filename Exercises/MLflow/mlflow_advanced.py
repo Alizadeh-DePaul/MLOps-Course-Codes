@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 from sklearn.model_selection import train_test_split
 
 # Set the experiment
-mlflow.set_experiment("iris-classification-advanced")
+mlflow.set_experiment("iris-classification-advanced-week7")
 
 # Load and prepare data
 iris = load_iris()

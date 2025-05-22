@@ -1,0 +1,3 @@
+2025-05-15 18:10:46,427 - __main__ - DEBUG - This message goes to the log file
+2025-05-15 18:10:46,428 - __main__ - INFO - Starting data preprocessing pipeline
+2025-05-15 18:10:46,428 - __main__ - WARNING - Missing values detected in feature X

@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 # Set the tracking URI and experiment
 mlflow.set_tracking_uri("http://localhost:5000")
-mlflow.set_experiment("iris-hyperopt")
+mlflow.set_experiment("iris-hyperopt-week7")
 
 # Load data
 iris = load_iris()

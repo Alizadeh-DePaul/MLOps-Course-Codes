@@ -1,7 +1,7 @@
-program: train.py
+program: Exercises\wandb\wandb_basic.py
 method: bayes
 metric:
-  name: validation_loss
+  name: running_loss
   goal: minimize
 parameters:
   learning_rate:

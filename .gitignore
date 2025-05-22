@@ -2,3 +2,4 @@ Exercises-Solutions/Reproducibility/
 mlartifacts/
 mlruns/
 wandb/
+/.pytest_cache
