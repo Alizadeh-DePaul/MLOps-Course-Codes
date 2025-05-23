@@ -26,4 +26,4 @@ jobs:
         pip install -r requirements_tests.txt
     - name: Test with pytest
       run: |
-        pytest .\Exercises\tests -v
+        pytest Exercises/tests/ -v
