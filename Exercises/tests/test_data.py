@@ -21,6 +21,8 @@ def test_dataset():
     transform = transforms.Compose([transforms.ToTensor()])
     return MNIST(_PATH_DATA, train=False, download=True, transform=transform)
 
+
+# @pytest.mark.skipif(not os.path.exists (_PATH_DATA), reason="MNIST data not found")
 def test_dataset_size(train_dataset, test_dataset):
     """Check if datasets have the expected number of samples."""
     assert len(train_dataset) == N_TRAIN, f"Expected {N_TRAIN} samples, got {len(train_dataset)}"
