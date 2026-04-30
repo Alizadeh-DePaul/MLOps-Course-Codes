@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug vae_mnist_buggy.py (current file)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/Exercises/MLCodeDebugging",
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        },
+        {
+            "name": "Debug vae_mnist_buggy.py (step into PyTorch internals)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/Exercises/MLCodeDebugging/vae_mnist_buggy.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "${workspaceFolder}/Exercises/MLCodeDebugging",
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        }
+    ]
+}

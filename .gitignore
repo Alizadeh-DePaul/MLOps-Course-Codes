@@ -24,9 +24,14 @@ venv/
 env/
 
 # --- IDEs --------------------------------------------------------------------
-.vscode/
 .idea/
 *.swp
+
+# Ignore personal .vscode/ at the repo root only. At subdirectory levels,
+# .vscode/ is allowed — specifically, per-exercise pre-wired course configs
+# under Exercises/<Name>/.vscode/ ARE tracked so students get a F5-ready
+# debugger out of a fresh clone.
+/.vscode/
 
 # --- OS ----------------------------------------------------------------------
 .DS_Store
