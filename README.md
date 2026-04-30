@@ -40,6 +40,7 @@ Each exercise folder under `Exercises/` is self-contained: a short README pointi
 | 4 | Application Logging | [`Exercises/ApplicationLogging/`](Exercises/ApplicationLogging/) |
 | 4 | Hydra (Configuration Management) | [`Exercises/Hydra/`](Exercises/Hydra/) |
 | 4 | Docker | [`Exercises/Docker/`](Exercises/Docker/) |
+| 5 | ML Code Debugging | [`Exercises/MLCodeDebugging/`](Exercises/MLCodeDebugging/) |
 | — | GCP Artifact Registry | [`Exercises/GCP Artifact Registry/`](Exercises/GCP%20Artifact%20Registry/) |
 | — | GitHub Actions | [`Exercises/Github Actions/`](Exercises/Github%20Actions/) |
 | — | MLflow | [`Exercises/MLflow/`](Exercises/MLflow/) |

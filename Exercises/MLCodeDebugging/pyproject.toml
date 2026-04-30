@@ -1,0 +1,38 @@
+[project]
+name = "ml-code-debugging"
+version = "0.1.0"
+description = "Starter code for the SE 489 ML Code Debugging exercise"
+requires-python = ">=3.11,<3.12"
+
+dependencies = [
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipdb>=0.13",   # nicer pdb (tab completion, syntax highlighting)
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+# ---------------------------------------------------------------------------
+# Ruff: linter + formatter. Keep light here so students can iterate fast
+# without ruff yelling at intentionally-buggy code.
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
+ignore = ["E402"]  # module-level imports below top of file (the script style)
+
+# ---------------------------------------------------------------------------
+# mypy: opt-in only for this exercise. The buggy script is intentionally
+# loose-typed so students focus on runtime bugs, not type bugs.
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
