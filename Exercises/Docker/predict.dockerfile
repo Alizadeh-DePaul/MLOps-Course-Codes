@@ -20,8 +20,7 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
 
 COPY simple_mlops/ simple_mlops/
 

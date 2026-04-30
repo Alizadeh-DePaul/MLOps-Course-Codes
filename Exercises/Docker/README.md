@@ -14,7 +14,7 @@ you actually edit and build.
 
 | File | What it is | Do you edit it? |
 | --- | --- | --- |
-| `train.dockerfile` | Dockerfile for the training image | **Yes** — you build this up following the exercise steps |
+| `train.dockerfile` | Dockerfile for the training image | **Yes** — step 12 starter; you'll modify it in step 14 |
 | `predict.dockerfile` | Dockerfile for the prediction image | **Yes** — similar pattern, different entrypoint |
 | `requirements.txt` | Minimal runtime deps (numpy) | No |
 | `pyproject.toml` | Package metadata so `pip install .` works | No |
@@ -22,6 +22,7 @@ you actually edit and build.
 | `simple_mlops/train.py` | Tiny script: generates a "model" (numpy weights) and saves it | No — read it, but don't edit for this exercise |
 | `simple_mlops/predict.py` | Tiny script: loads the model + some input and prints a prediction | No |
 | `data/make_example_data.py` | Generates `example_images.npy` for the predict image | No |
+| `demo.nu` / `demo.sh` / `demo.ps1` | End-to-end runners — pick whichever shell you have | No — handy if you get stuck reproducing the steps |
 
 The goal isn't to train a real model — it's to get comfortable with the
 container lifecycle.
@@ -51,14 +52,48 @@ docker run --name pred --rm \
     predict:latest /app/trained_model.npy /app/example_images.npy
 ```
 
+## End-to-end dry run
+
+Three equivalent runners are provided; pick whichever shell you prefer:
+
+```nu
+nu demo.nu           # cross-platform (Windows / macOS / Linux) - recommended
+```
+
+```bash
+bash demo.sh         # macOS / Linux / WSL / Git Bash
+```
+
+```powershell
+.\demo.ps1          # Windows PowerShell (no extra install needed)
+```
+
+> **Nushell install** (one time): `winget install nushell` on Windows,
+> `brew install nushell` on macOS, or `cargo install nu` anywhere.
+
+> **PowerShell execution policy**: if Windows blocks `.\demo.ps1` the first
+> time, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` once
+> per terminal session.
+
 ## BuildKit cache (optional, step 14)
 
-For faster rebuilds, `train.dockerfile` uses a `--mount=type=cache` line:
+After you finish step 12 your `train.dockerfile` will install dependencies
+with the simple form:
+
+```dockerfile
+RUN pip install -r requirements.txt --no-cache-dir
+```
+
+In step 14 you'll *replace* that line with a BuildKit cache mount so
+re-installing big libraries on rebuild becomes nearly free:
 
 ```dockerfile
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r requirements.txt
 ```
+
+Note that you drop `--no-cache-dir` here on purpose: pip needs to actually
+write to the cache mount for the optimization to work.
 
 BuildKit is enabled by default in Docker 23.0+ (which is effectively every
 install in 2026). If you're on something older, prefix the build command

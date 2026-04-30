@@ -1,6 +1,11 @@
 # -----------------------------------------------------------------------------
 # Training image for the SE 489 Docker exercise.
 #
+# This file matches the state described in step 12 of the exercise page:
+# pip installs use --no-cache-dir to keep the image small. In step 14 you
+# will REPLACE the first `pip install -r requirements.txt --no-cache-dir`
+# line with a BuildKit cache mount to speed up rebuilds.
+#
 # Build:   docker build -f train.dockerfile . -t train:latest
 # Run:     docker run --name exp1 -v ${PWD}/models:/app/models train:latest
 # -----------------------------------------------------------------------------
@@ -17,14 +22,12 @@ RUN apt-get update && \
 WORKDIR /app
 
 # 3. Copy metadata first so requirement changes bust the cache, but code
-#    changes do not. Install deps with BuildKit's cache mount — pip's cache
-#    is kept on the host for subsequent builds, but nothing ends up inside
-#    the image layer.
+#    changes do not. --no-cache-dir keeps pip from baking its download cache
+#    into the image layer.
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
 
 # 4. Copy the project code. Order matters: changes here won't invalidate the
 #    dependency layer above.

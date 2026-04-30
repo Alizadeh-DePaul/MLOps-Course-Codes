@@ -1,0 +1,8 @@
+# Force LF for shell-style scripts and Dockerfiles so they execute correctly
+# inside Linux containers and on macOS, regardless of contributor OS or
+# core.autocrlf settings.
+*.sh         text eol=lf
+*.nu         text eol=lf
+*.ps1        text eol=lf
+Dockerfile*  text eol=lf
+*.dockerfile text eol=lf
