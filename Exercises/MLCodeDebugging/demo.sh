@@ -10,11 +10,15 @@ set -euo pipefail
 
 # --- 1. Environment --------------------------------------------------------
 # Install uv once: curl -LsSf https://astral.sh/uv/install.sh | sh
-echo "[1/4] Creating venv + installing package ..."
-uv venv                                    # alt: python -m venv .venv
+#
+# Defaults to the CPU torch wheel (~200 MB) so it works on every machine.
+# Override by exporting MLCODEDEBUG_EXTRA=cuda before running:
+#   MLCODEDEBUG_EXTRA=cuda bash demo.sh
+EXTRA="${MLCODEDEBUG_EXTRA:-cpu}"
+echo "[1/4] Syncing venv with --extra ${EXTRA} ..."
+uv sync "--extra=${EXTRA}"
 # shellcheck disable=SC1091
 source .venv/bin/activate                  # Windows Git Bash: .venv/Scripts/activate
-uv pip install -e .                        # alt: pip install -e .
 
 # --- 2. Run the (fixed) script with epochs forced to 1 ---------------------
 echo

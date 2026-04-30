@@ -4,13 +4,27 @@ version = "0.1.0"
 description = "Starter code for the SE 489 ML Code Debugging exercise"
 requires-python = ">=3.11,<3.12"
 
+# Base deps shared by every install. torch is intentionally NOT here — it's
+# in the cpu/cuda extras below because the wheel comes from different indexes.
 dependencies = [
-    "torch>=2.2",
     "torchvision>=0.17",
     "numpy>=1.26",
 ]
 
+# ---------------------------------------------------------------------------
+# Optional dependencies (extras).
+#
+# Pick exactly ONE of cpu / cuda when installing. They are mutually
+# exclusive — see the [tool.uv] conflicts block at the bottom.
+#
+#   uv sync --extra cpu              CPU-only / Apple Silicon
+#   uv sync --extra cuda             Windows or Linux with NVIDIA GPU
+#   uv sync --extra cuda --extra dev # add the dev tools too
+# ---------------------------------------------------------------------------
 [project.optional-dependencies]
+cpu = ["torch>=2.2"]
+cuda = ["torch>=2.2"]
+
 dev = [
     "ipdb>=0.13",   # nicer pdb (tab completion, syntax highlighting)
     "ruff>=0.5",
@@ -36,3 +50,33 @@ ignore = ["E402"]  # module-level imports below top of file (the script style)
 [tool.mypy]
 python_version = "3.11"
 ignore_missing_imports = true
+
+# ---------------------------------------------------------------------------
+# uv: route `torch` to the right wheel index based on which extra is active.
+# torchvision and numpy come from the default PyPI index — no override needed.
+# ---------------------------------------------------------------------------
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu",   extra = "cpu" },
+    { index = "pytorch-cu128", extra = "cuda" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true                 # only used by packages that point at it
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+# Tell uv that cpu and cuda extras are mutually exclusive. Without this,
+# `uv sync --all-extras` would try to install both and fail to resolve.
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "cuda" },
+    ],
+]

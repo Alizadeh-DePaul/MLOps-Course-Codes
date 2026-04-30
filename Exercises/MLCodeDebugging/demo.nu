@@ -24,8 +24,15 @@ $env.config.error_style = "fancy"
 # Install uv once:
 #   Windows:     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 #   macOS/Linux: curl -LsSf https://astral.sh/uv/install.sh | sh
-print "[1/4] Creating venv + installing package ..."
-uv venv
+#
+# This runner defaults to the CPU torch wheel (~200 MB) so it works on every
+# machine. Override by setting MLCODEDEBUG_EXTRA=cuda before running, e.g.:
+#   MLCODEDEBUG_EXTRA=cuda nu demo.nu       # macOS / Linux
+#   $env:MLCODEDEBUG_EXTRA = "cuda"; nu demo.nu  # Windows PowerShell
+print "[1/4] Syncing venv with the matching torch extra ..."
+let extra = ($env | get -i MLCODEDEBUG_EXTRA | default "cpu")
+print $"  using --extra ($extra)"
+uv sync $"--extra=($extra)"
 
 let venv_bin = if $nu.os-info.name == "windows" {
     (pwd | path join ".venv" "Scripts")
@@ -34,8 +41,6 @@ let venv_bin = if $nu.os-info.name == "windows" {
 }
 $env.PATH = ($env.PATH | prepend $venv_bin)
 $env.VIRTUAL_ENV = (pwd | path join ".venv")
-
-uv pip install -e .
 
 # --- 2. Patch epochs down so the smoke test finishes quickly ---------------
 # The script ships with epochs=20. For a smoke test we want one epoch.

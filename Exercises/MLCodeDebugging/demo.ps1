@@ -12,10 +12,14 @@ $ErrorActionPreference = 'Stop'
 
 # --- 1. Environment --------------------------------------------------------
 # Install uv once: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-Write-Host "[1/4] Creating venv + installing package ..."
-uv venv                                                   # alt: python -m venv .venv
+#
+# Defaults to the CPU torch wheel (~200 MB) so it works on every machine.
+# Override by setting $env:MLCODEDEBUG_EXTRA = "cuda" before running:
+#   $env:MLCODEDEBUG_EXTRA = "cuda"; .\demo.ps1
+$Extra = if ($env:MLCODEDEBUG_EXTRA) { $env:MLCODEDEBUG_EXTRA } else { 'cpu' }
+Write-Host "[1/4] Syncing venv with --extra $Extra ..."
+uv sync "--extra=$Extra"
 . .\.venv\Scripts\Activate.ps1
-uv pip install -e .                                       # alt: pip install -e .
 
 # --- 2. Run the (fixed) script with epochs forced to 1 ---------------------
 Write-Host ""

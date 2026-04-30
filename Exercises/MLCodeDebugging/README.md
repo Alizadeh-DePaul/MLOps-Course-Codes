@@ -31,31 +31,60 @@ This folder is the code you clone and edit.
 
 ## Quick start
 
-This exercise targets **Python 3.11**. Pick the workflow that matches the
-tool you already have installed.
+This exercise targets **Python 3.11**. There are two install variants —
+pick the one that matches your machine. They're mutually exclusive; pick
+one or the other, not both.
+
+| Your machine | Use this extra | Wheel size |
+| --- | --- | --- |
+| CPU-only laptop, Apple Silicon (Mac M-series) | `--extra cpu` | ~200 MB |
+| Windows or Linux with NVIDIA GPU + drivers | `--extra cuda` | ~2.5 GB |
+
+Don't know? Run `nvidia-smi`. If it prints a GPU table, use `cuda`. If
+the command isn't found, use `cpu`.
 
 ```bash
 # Install uv once (skip if you have it):
 #   curl -LsSf https://astral.sh/uv/install.sh | sh             # macOS/Linux
 #   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
 
-# 1. Create a venv and install the deps
-uv venv
-source .venv/bin/activate            # Windows: .venv\Scripts\activate
-uv pip install -e .
+# 1. Pick exactly ONE — sync your venv with the matching extra:
+uv sync --extra cpu                  # CPU / Apple Silicon
+# OR
+uv sync --extra cuda                 # NVIDIA GPU (Windows / Linux)
 
-# 2. Try to run the broken script (it will crash). That's the starting point.
+# 2. Activate the venv:
+source .venv/bin/activate            # Windows: .venv\Scripts\Activate.ps1
+
+# 3. Try to run the broken script (it will crash). That's the starting point.
 python vae_mnist_buggy.py
 
-# 3. Use a debugger to find each bug. See the exercise page for the workflow.
+# 4. Use a debugger to find each bug. See the exercise page for the workflow.
 ```
+
+To add the dev tools (`ipdb`, `ruff`, `mypy`) on top:
+
+```bash
+uv sync --extra cuda --extra dev     # or: --extra cpu --extra dev
+```
+
+To switch later (e.g. you got a GPU): just re-run `uv sync` with the
+other extra. uv will swap the wheels.
 
 ### Alternative (plain pip)
 
+Plain pip doesn't read `[tool.uv.sources]`, so you have to point it at
+the right index manually:
+
 ```bash
 python -m venv .venv
-source .venv/bin/activate            # Windows: .venv\Scripts\activate
-pip install -e .
+source .venv/bin/activate            # Windows: .venv\Scripts\Activate.ps1
+
+# CPU:
+pip install -e ".[cpu]" --extra-index-url https://download.pytorch.org/whl/cpu
+
+# CUDA:
+pip install -e ".[cuda]" --extra-index-url https://download.pytorch.org/whl/cu128
 ```
 
 ## Three ways to debug — quick reference
