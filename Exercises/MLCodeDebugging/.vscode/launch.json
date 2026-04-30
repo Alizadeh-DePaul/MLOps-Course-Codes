@@ -1,26 +1,27 @@
 {
+    "// note": "Uses ${fileDirname} for cwd and ${file} for program, so these configs work whether you open MLOps-Course-Codes/ as the workspace or just Exercises/MLCodeDebugging/.",
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug vae_mnist_buggy.py (current file)",
+            "name": "Debug current file (justMyCode)",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "cwd": "${workspaceFolder}/Exercises/MLCodeDebugging",
+            "cwd": "${fileDirname}",
             "env": {
                 "PYTHONUNBUFFERED": "1"
             }
         },
         {
-            "name": "Debug vae_mnist_buggy.py (step into PyTorch internals)",
+            "name": "Debug current file (step into PyTorch internals)",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/Exercises/MLCodeDebugging/vae_mnist_buggy.py",
+            "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "cwd": "${workspaceFolder}/Exercises/MLCodeDebugging",
+            "cwd": "${fileDirname}",
             "env": {
                 "PYTHONUNBUFFERED": "1"
             }
