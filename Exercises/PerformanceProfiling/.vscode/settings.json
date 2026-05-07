@@ -1,0 +1,15 @@
+{
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.extraPaths": ["."],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": false,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        ".pytest_cache": true,
+        ".ruff_cache": true,
+        ".mypy_cache": true,
+        "log": true,
+        "*.prof": true
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "cProfile driver (Section 1)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/profile_cprofile.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "ResNet-18 profiler (Section 2)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/profile_resnet.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Full training profiler (Section 2)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/profile_training.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "VAE baseline (no profiler)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/vae_mnist.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
+}

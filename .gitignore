@@ -8,6 +8,12 @@ wandb/
 outputs/           # Hydra run-scoped output folders (per-exercise)
 multirun/          # Hydra --multirun output folders
 
+# --- Profiler artifacts (per-exercise PerformanceProfiling) ------------------
+*.prof             # cProfile dumps (e.g. vae.prof)
+log/               # tensorboard_trace_handler output (.pt.trace.json)
+profiler/          # generic profiler-output catch-all
+trace.json         # export_chrome_trace output
+
 # --- Python / tooling --------------------------------------------------------
 __pycache__/
 *.py[cod]

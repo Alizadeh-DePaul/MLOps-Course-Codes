@@ -17,6 +17,8 @@ MLOps-Course-Codes/
 │   ├── ApplicationLogging/         Week 4
 │   ├── Hydra/                      Week 4
 │   ├── Docker/                     Week 4
+│   ├── MLCodeDebugging/            Week 5
+│   ├── PerformanceProfiling/       Week 5/6
 │   ├── GCP Artifact Registry/
 │   ├── Github Actions/
 │   └── MLflow/
@@ -41,6 +43,7 @@ Each exercise folder under `Exercises/` is self-contained: a short README pointi
 | 4 | Hydra (Configuration Management) | [`Exercises/Hydra/`](Exercises/Hydra/) |
 | 4 | Docker | [`Exercises/Docker/`](Exercises/Docker/) |
 | 5 | ML Code Debugging | [`Exercises/MLCodeDebugging/`](Exercises/MLCodeDebugging/) |
+| 5 / 6 | Python and ML Code Performance Profiling | [`Exercises/PerformanceProfiling/`](Exercises/PerformanceProfiling/) |
 | — | GCP Artifact Registry | [`Exercises/GCP Artifact Registry/`](Exercises/GCP%20Artifact%20Registry/) |
 | — | GitHub Actions | [`Exercises/Github Actions/`](Exercises/Github%20Actions/) |
 | — | MLflow | [`Exercises/MLflow/`](Exercises/MLflow/) |
