@@ -1,7 +1,18 @@
+"""Programmatic logging configuration demo.
 
+Same end-state as logger_advanced.py, but built up handler-by-handler in
+Python code instead of from a dictConfig dict. Useful when you want to
+conditionally wire handlers (e.g. only attach the file handler in
+production), but `dictConfig` is preferred for static setups.
+
+Run from inside Exercises/ApplicationLogging/:
+    python logging_Programmatic.py
+"""
 import logging
-from rich.logging import RichHandler
+import logging.handlers  # NEED this explicit import for RotatingFileHandler
 from pathlib import Path
+
+from rich.logging import RichHandler
 
 # Setup
 BASE_DIR = Path(__file__).resolve().parent

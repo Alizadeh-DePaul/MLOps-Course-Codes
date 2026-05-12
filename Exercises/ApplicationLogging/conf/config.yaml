@@ -1,0 +1,41 @@
+# Hydra config for logging_hydra.py.
+#
+# Two things going on here:
+#   1. `model.*` is a fake ML config so `cfg.model` resolves to something
+#      meaningful when the script logs it. Override at the CLI:
+#         python logging_hydra.py model.name=resnet50 model.lr=1e-3
+#   2. `hydra.job_logging` is the special Hydra key that overrides the
+#      job logger's dictConfig. Same schema as plain Python logging,
+#      just nested under `hydra:`. Each run gets its own main.log under
+#      outputs/<date>/<time>/ via ${hydra.runtime.output_dir}.
+
+model:
+  name: simple_cnn
+  lr: 1e-4
+  batch_size: 32
+  epochs: 10
+
+hydra:
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '%(message)s'
+      detailed:
+        format: '%(levelname)s - %(asctime)s - %(name)s - %(message)s'
+    handlers:
+      console:
+        class: rich.logging.RichHandler
+        formatter: simple
+        level: INFO
+        markup: true
+      file:
+        class: logging.handlers.RotatingFileHandler
+        formatter: detailed
+        filename: ${hydra.runtime.output_dir}/main.log
+        maxBytes: 10485760
+        backupCount: 5
+        level: DEBUG
+    root:
+      level: DEBUG
+      handlers: [console, file]

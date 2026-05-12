@@ -1,0 +1,28 @@
+[project]
+name = "mlops-application-logging-exercise"
+version = "0.1.0"
+description = "Python logging deep-dive: dictConfig, RotatingFileHandler, rich, and Hydra job_logging."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "rich>=13",
+    "hydra-core==1.3.2",
+    "omegaconf>=2.3,<2.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.4",
+]
+
+# Bonus snippets (logging_pytorch.py, logging_tensorflow.py) import torch and
+# tensorflow at module level. They're for reading, not for running as part of
+# the demo, so we intentionally do NOT pin those frameworks here -- adding them
+# would balloon the install size for a logging exercise.
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
