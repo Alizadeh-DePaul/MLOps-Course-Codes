@@ -4,7 +4,7 @@ Exercises-Solutions/
 # --- ML experiment tracking artifacts ----------------------------------------
 mlartifacts/
 mlruns/
-wandb/
+/wandb/
 outputs/           # Hydra run-scoped output folders (per-exercise)
 multirun/          # Hydra --multirun output folders
 

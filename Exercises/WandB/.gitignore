@@ -1,0 +1,5 @@
+# torchvision MNIST download cache - per-machine, never commit
+data/
+
+# Local docker --env-file for the WANDB_API_KEY - never commit
+.env

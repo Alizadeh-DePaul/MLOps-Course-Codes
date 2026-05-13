@@ -1,0 +1,7 @@
+# Container-only deps for wandb.dockerfile. The local dev install reads
+# from pyproject.toml instead (uv pip install -e .).
+torch>=2.2
+torchvision>=0.17
+wandb>=0.18
+matplotlib>=3.8
+numpy>=1.26

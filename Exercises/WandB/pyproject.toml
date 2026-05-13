@@ -1,0 +1,34 @@
+[project]
+name = "mlops-wandb-exercise"
+version = "0.1.0"
+description = "SE 489 Week 7 — Experiment logging in Python using Weights & Biases."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "wandb>=0.18",
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.4",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# Single-file modules: train.py and train_advanced.py live at the top level,
+# they are not a package. py-modules tells setuptools to pick them up.
+py-modules = ["train", "train_advanced"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
