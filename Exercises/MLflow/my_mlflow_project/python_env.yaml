@@ -1,0 +1,22 @@
+# MLflow Project environment spec - virtualenv flavor.
+#
+# `mlflow run my_mlflow_project --env-manager virtualenv` reads this file,
+# creates a scratch virtualenv at the pinned Python version, and installs
+# the build_dependencies (pip toolchain) followed by the runtime dependencies
+# below before invoking the entrypoint defined in the MLproject file.
+python: "3.11"
+
+# Bootstrap deps for the scratch venv. Keep current; MLflow injects them
+# before the runtime deps so resolver behavior is predictable.
+build_dependencies:
+  - pip
+  - setuptools>=68
+  - wheel
+
+# Runtime deps for the project. These are the same libraries used in the
+# host-venv quick-start, just pinned for reproducibility of the Project run.
+dependencies:
+  - mlflow>=3.12,<4
+  - scikit-learn>=1.8
+  - pandas>=2.2
+  - numpy>=1.26

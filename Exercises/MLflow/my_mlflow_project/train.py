@@ -22,7 +22,10 @@ def main():
     X, y = iris.data, iris.target
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Enable auto-logging
+    # Enable auto-logging. With sklearn autolog, MLflow 3.x captures the model,
+    # input/output signature, params, and metrics for us — we only add things
+    # autolog doesn't know about (here: the dataset name and a manual test
+    # accuracy in addition to the autologged training accuracy).
     mlflow.sklearn.autolog()
 
     # Start a run

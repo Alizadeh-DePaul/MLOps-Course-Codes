@@ -1,6 +1,13 @@
 name: iris_classification_project
 
-conda_env: conda.yaml
+# MLflow Projects supports two environment specs: conda_env (conda) and
+# python_env (virtualenv). We use python_env here because:
+#   1. It's the MLflow-recommended default for pure-Python projects in 2026.
+#   2. It composes cleanly with the course's `uv` story (no conda required).
+#   3. virtualenv is faster to materialize than a conda env on a fresh host.
+# Switch to conda_env: conda.yaml only if you need native libraries (CUDA,
+# Intel MKL, etc.) that conda packages but PyPI does not.
+python_env: python_env.yaml
 
 entry_points:
   main:

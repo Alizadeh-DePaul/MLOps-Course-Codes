@@ -12,11 +12,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Log the model with MLflow
+# Log the model with MLflow.
+# MLflow 3.x: artifact subpath goes in `name=`. `registered_model_name=` will
+# both log the model AND register it with the Model Registry in one step.
 mlflow.sklearn.log_model(
     model,
-    "iris_rf_model",
-    registered_model_name="iris_rf_docker"
+    name="iris_rf_model",
+    registered_model_name="iris_rf_docker",
 )
 
 # Build a Docker image for serving

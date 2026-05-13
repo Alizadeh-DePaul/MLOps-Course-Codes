@@ -82,8 +82,9 @@ for params in hyperparams:
             f.write(report)
         mlflow.log_artifact("classification_report.txt")
 
-        # Log the model
-        mlflow.sklearn.log_model(model, "random_forest_model")
+        # Log the model.
+        # MLflow 3.x: pass the artifact subpath via the `name=` keyword.
+        mlflow.sklearn.log_model(model, name="random_forest_model")
 
         # Log a sample of the dataset
         sample_df = pd.DataFrame(X_test[:5], columns=feature_names)

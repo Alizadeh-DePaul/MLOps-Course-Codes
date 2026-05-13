@@ -33,8 +33,10 @@ with mlflow.start_run(run_name="basic-logistic-regression"):
     # Log metrics
     mlflow.log_metric("accuracy", accuracy)
 
-    # Log the model
-    mlflow.sklearn.log_model(model, "model")
+    # Log the model.
+    # MLflow 3.x: the artifact subpath is passed as `name=` (the old positional
+    # `artifact_path=` form still works but emits a deprecation warning).
+    mlflow.sklearn.log_model(model, name="model")
 
     # Log feature names for reference
     mlflow.log_dict({"feature_names": iris.feature_names}, "features.json")
