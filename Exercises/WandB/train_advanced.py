@@ -10,6 +10,16 @@ Beyond `wandb.log({"loss": ...})`, this script shows four richer media types:
 After running this, open the Workspace UI; the Media panel will show the
 images and the confusion matrix, and the Custom Charts panel will hold the
 weight histograms and matplotlib figure.
+
+Gotcha worth knowing:
+    `wandb.log` commits a step as soon as the *next* call uses a higher step.
+    Repeated `wandb.log` calls at the *same* step are silently dropped once
+    the step has been committed (you'll see "Step ... is less than the
+    current step" warnings in the console). The pattern below is therefore:
+    one consolidated dictionary per step. The end-of-run block builds a
+    single `end_metrics` dict containing histograms + matplotlib figure +
+    confusion matrix, then logs them in one `wandb.log` call at a
+    deliberately fresh `end_step`.
 """
 from __future__ import annotations
 
@@ -31,37 +41,6 @@ def build_model(dropout: float = 0.2) -> nn.Module:
         nn.Dropout(dropout),
         nn.Linear(128, 10),
     )
-
-
-def log_weight_histograms(model: nn.Module, step: int) -> None:
-    """Log a histogram per `weight` tensor in the model."""
-    for name, param in model.named_parameters():
-        if "weight" in name:
-            wandb.log(
-                {f"hist/{name}": wandb.Histogram(param.detach().cpu().numpy())},
-                step=step,
-            )
-
-
-def log_sample_images(images: torch.Tensor, step: int, n: int = 4) -> None:
-    """Log the first n images of a batch as a W&B media panel."""
-    # images shape: (batch, 1, 28, 28). Squeeze to (batch, 28, 28) for display.
-    sample = images[:n].squeeze(1).cpu().numpy()
-    wandb.log(
-        {"sample_images": [wandb.Image(img, caption=f"img {i}") for i, img in enumerate(sample)]},
-        step=step,
-    )
-
-
-def log_loss_curve(losses: list[float], step: int) -> None:
-    """Log a matplotlib figure of the running loss."""
-    fig, ax = plt.subplots()
-    ax.plot(losses)
-    ax.set_xlabel("logging step")
-    ax.set_ylabel("loss")
-    ax.set_title("Running loss")
-    wandb.log({"loss_curve_mpl": wandb.Image(fig)}, step=step)
-    plt.close(fig)  # release the figure or matplotlib leaks memory across logs
 
 
 def main() -> None:
@@ -109,33 +88,62 @@ def main() -> None:
             if (i + 1) % 100 == 0:
                 avg = running_loss / 100
                 losses.append(avg)
-                wandb.log({"loss": avg, "epoch": epoch + 1}, step=global_step)
+
+                # Build ONE dict per step. If we also want to log sample images
+                # this iteration, merge them into the same dict instead of
+                # making a second wandb.log call (which would be dropped).
+                step_metrics: dict = {"loss": avg, "epoch": epoch + 1}
+                if (i + 1) % 500 == 0:
+                    sample = images[:4].squeeze(1).cpu().numpy()
+                    step_metrics["sample_images"] = [
+                        wandb.Image(img, caption=f"img {idx}")
+                        for idx, img in enumerate(sample)
+                    ]
+
+                wandb.log(step_metrics, step=global_step)
                 running_loss = 0.0
 
-                # Every 500 steps, log a few sample images so the Media panel populates.
-                if (i + 1) % 500 == 0:
-                    log_sample_images(images, step=global_step)
+    # End-of-run logging. Bump the step past the last in-loop log so this
+    # commit is unambiguously a "new" step (avoids the same-step drop).
+    end_step = global_step + 1
+    end_metrics: dict = {}
 
-    # End-of-run logging — these use values from the LAST mini-batch, which is
-    # the well-defined point where the model has finished training.
-    log_weight_histograms(model, step=global_step)
-    log_loss_curve(losses, step=global_step)
+    # Histograms of every weight tensor. Pre-compute the (counts, edges) tuple
+    # via numpy and pass it as `np_histogram` so the wandb type stubs are
+    # happy AND we control the bin count explicitly.
+    for name, param in model.named_parameters():
+        if "weight" in name:
+            arr = param.detach().cpu().numpy().ravel()
+            end_metrics[f"hist/{name}"] = wandb.Histogram(
+                np_histogram=np.histogram(arr, bins=64)
+            )
 
+    # Matplotlib loss curve, wrapped in wandb.Image so wandb rasterizes it.
+    fig, ax = plt.subplots()
+    ax.plot(losses)
+    ax.set_xlabel("logging step")
+    ax.set_ylabel("loss")
+    ax.set_title("Running loss")
+    end_metrics["loss_curve_mpl"] = wandb.Image(fig)
+    plt.close(fig)  # release the figure or matplotlib leaks memory across runs
+
+    # Confusion matrix + final accuracy from the last mini-batch. .tolist() on
+    # the numpy arrays makes wandb's Sequence type hints happy without changing
+    # the data; for batch sizes around 64 the conversion cost is irrelevant.
     if last_outputs is not None and last_labels is not None:
         _, preds = torch.max(last_outputs, dim=1)
-        wandb.log(
-            {
-                "final_batch_accuracy": (preds == last_labels).float().mean().item(),
-                "confusion_matrix": wandb.plot.confusion_matrix(
-                    probs=None,
-                    y_true=last_labels.cpu().numpy(),
-                    preds=preds.cpu().numpy(),
-                    class_names=[str(i) for i in range(10)],
-                ),
-            },
-            step=global_step,
+        end_metrics["final_batch_accuracy"] = (
+            (preds == last_labels).float().mean().item()
+        )
+        end_metrics["confusion_matrix"] = wandb.plot.confusion_matrix(
+            probs=None,
+            y_true=last_labels.cpu().numpy().tolist(),
+            preds=preds.cpu().numpy().tolist(),
+            class_names=[str(i) for i in range(10)],
         )
 
+    # ONE commit for the entire end-of-run payload.
+    wandb.log(end_metrics, step=end_step)
     wandb.finish()
 
 
