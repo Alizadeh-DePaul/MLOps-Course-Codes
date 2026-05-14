@@ -13,20 +13,22 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+# Configure WANDB_DIR BEFORE `import wandb` so wandb's module-init code never
+# creates a `./wandb/` cache in this script's directory. If `./wandb/` exists
+# in CWD when `wandb agent` spawns a Python subprocess, Python imports that
+# local folder as a PEP 420 namespace package instead of the installed wandb
+# library, and the subprocess dies with
+# `AttributeError: module 'wandb' has no attribute 'init'`.
+_WANDB_RUNS = Path.home() / ".wandb-runs"
+_WANDB_RUNS.mkdir(parents=True, exist_ok=True)
+os.environ.setdefault("WANDB_DIR", str(_WANDB_RUNS))
 
-import wandb
+import torch  # noqa: E402
+import torch.nn as nn  # noqa: E402
+from torch.utils.data import DataLoader  # noqa: E402
+from torchvision import datasets, transforms  # noqa: E402
 
-# Redirect wandb's run output OUT of this script's directory. Otherwise the
-# local `./wandb/` cache directory shadows the installed `wandb` package as a
-# PEP 420 namespace package when running under `wandb agent`, and the
-# subprocess sees `module 'wandb' has no attribute 'init'`. WANDB_DIR env var
-# overrides if the user wants their runs somewhere else.
-_WANDB_DIR = Path(os.environ.get("WANDB_DIR") or Path.home() / ".wandb-runs")
-_WANDB_DIR.mkdir(parents=True, exist_ok=True)
+import wandb  # noqa: E402  -- must come AFTER WANDB_DIR is set in os.environ
 
 
 def build_model(dropout: float = 0.2) -> nn.Module:
@@ -52,8 +54,7 @@ def main() -> None:
             "epochs": 2,
             "dropout": 0.2,
         },
-        dir=str(_WANDB_DIR),
-    )
+    )  # WANDB_DIR is already in os.environ, so wandb's runs land in ~/.wandb-runs
 
     # 2. Read hyperparameters from wandb.config — this is what lets a sweep
     #    inject different values without you editing the file.
