@@ -95,8 +95,10 @@ def main() -> None:
                 step_metrics: dict = {"loss": avg, "epoch": epoch + 1}
                 if (i + 1) % 500 == 0:
                     sample = images[:4].squeeze(1).cpu().numpy()
+                    # caption=label makes the dashboard thumbnail self-describing:
+                    # each image gets the ground-truth MNIST digit underneath.
                     step_metrics["sample_images"] = [
-                        wandb.Image(img, caption=f"img {idx}")
+                        wandb.Image(img, caption=f"label={labels[idx].item()}")
                         for idx, img in enumerate(sample)
                     ]
 
