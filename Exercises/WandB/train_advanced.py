@@ -23,6 +23,9 @@ Gotcha worth knowing:
 """
 from __future__ import annotations
 
+import os
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
@@ -31,6 +34,14 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 import wandb
+
+# Redirect wandb's run output OUT of this script's directory. Otherwise the
+# local `./wandb/` cache directory shadows the installed `wandb` package as a
+# PEP 420 namespace package when running under `wandb agent`, and the
+# subprocess sees `module 'wandb' has no attribute 'init'`. WANDB_DIR env var
+# overrides if the user wants their runs somewhere else.
+_WANDB_DIR = Path(os.environ.get("WANDB_DIR") or Path.home() / ".wandb-runs")
+_WANDB_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def build_model(dropout: float = 0.2) -> nn.Module:
@@ -53,6 +64,7 @@ def main() -> None:
             "epochs": 1,  # one epoch is enough to see all the media types
             "dropout": 0.2,
         },
+        dir=str(_WANDB_DIR),
     )
     cfg = wandb.config
 

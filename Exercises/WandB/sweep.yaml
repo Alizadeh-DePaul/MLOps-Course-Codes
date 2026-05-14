@@ -11,6 +11,7 @@
 ##   * The training loop must call `wandb.log({"loss": ...})` for the metric
 ##     name below to be visible to the sweep optimizer.
 program: train.py
+project: Week7-project   # land sweep runs in the same dashboard as your direct `python train.py` runs
 method: bayes
 metric:
   name: loss
