@@ -12,6 +12,19 @@
 ##     name below to be visible to the sweep optimizer.
 program: train.py
 project: Week7-project   # land sweep runs in the same dashboard as your direct `python train.py` runs
+
+# Force the agent's subprocess to use the SAME Python interpreter that's running
+# the agent itself (i.e. your venv's python.exe), instead of whatever `python`
+# resolves to on PATH. Without this, on Windows machines with anaconda installed,
+# the subprocess often picks up anaconda's python instead of the venv's, and you
+# get `AttributeError: module 'wandb' has no attribute 'init'` because anaconda
+# doesn't have wandb properly installed.
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
+
 method: bayes
 metric:
   name: loss

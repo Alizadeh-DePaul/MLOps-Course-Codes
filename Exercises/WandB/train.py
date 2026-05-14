@@ -10,25 +10,12 @@ The point of the exercise is the W&B integration, not the ML.
 """
 from __future__ import annotations
 
-import os
-from pathlib import Path
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
 
-# Configure WANDB_DIR BEFORE `import wandb` so wandb's module-init code never
-# creates a `./wandb/` cache in this script's directory. If `./wandb/` exists
-# in CWD when `wandb agent` spawns a Python subprocess, Python imports that
-# local folder as a PEP 420 namespace package instead of the installed wandb
-# library, and the subprocess dies with
-# `AttributeError: module 'wandb' has no attribute 'init'`.
-_WANDB_RUNS = Path.home() / ".wandb-runs"
-_WANDB_RUNS.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("WANDB_DIR", str(_WANDB_RUNS))
-
-import torch  # noqa: E402
-import torch.nn as nn  # noqa: E402
-from torch.utils.data import DataLoader  # noqa: E402
-from torchvision import datasets, transforms  # noqa: E402
-
-import wandb  # noqa: E402  -- must come AFTER WANDB_DIR is set in os.environ
+import wandb
 
 
 def build_model(dropout: float = 0.2) -> nn.Module:
@@ -54,7 +41,7 @@ def main() -> None:
             "epochs": 2,
             "dropout": 0.2,
         },
-    )  # WANDB_DIR is already in os.environ, so wandb's runs land in ~/.wandb-runs
+    )
 
     # 2. Read hyperparameters from wandb.config — this is what lets a sweep
     #    inject different values without you editing the file.
