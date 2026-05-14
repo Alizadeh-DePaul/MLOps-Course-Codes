@@ -18,7 +18,7 @@ here are the runnable reference you should clone and play with.
 | `logging_rich.py` | Same `dictConfig` but with `RichHandler` for colorized console output. | 4 |
 | `logging_Programmatic.py` | Same end-state as `logger_advanced.py`, built handler-by-handler in Python code. | 5 |
 | `logging_conf.py` + `logging.conf` | Same idea loaded from a ConfigParser `.ini`-style file. | 6 |
-| `logging_hydra.py` + `config.yaml` | The same logging dictConfig schema, but injected via Hydra's `hydra.job_logging` override. | 7 (optional) |
+| `logging_hydra.py` + `conf/config.yaml` + `conf/hydra/job_logging/custom_logging.yaml` | The same logging dictConfig schema, but injected via Hydra's `defaults: - override hydra/job_logging: ...` mechanism. The override pattern (not inline) avoids a deep-merge collision with Hydra's built-in default that would otherwise pass `stream=` to `RichHandler` and crash. | 7 (optional) |
 | `logging_pytorch.py`, `logging_tensorflow.py` | Tiny bonus snippets showing how to thread the logger through a real ML training loop. | reference |
 | `pyproject.toml` | Dependency pins (`rich`, `hydra-core`, `omegaconf`). | --- |
 
@@ -107,3 +107,11 @@ contents of `logs/` so you can see what got written.
 - **`disable_existing_loggers`** — if loggers from other modules go
   silent after `dictConfig(...)`, set `"disable_existing_loggers": False`
   in your dict (the starter dicts here do this).
+- **`TypeError: RichHandler.__init__() got an unexpected keyword
+  argument 'stream'`** when running `logging_hydra.py` — you set
+  `hydra.job_logging` inline in `config.yaml` instead of using the
+  `defaults: - override hydra/job_logging: custom_logging` pattern.
+  Hydra deep-merges inline overrides with the built-in default
+  (which has `handlers.console.stream: ext://sys.stdout`) and passes
+  that `stream:` straight into `RichHandler`. Restructure into two
+  files as shown above.

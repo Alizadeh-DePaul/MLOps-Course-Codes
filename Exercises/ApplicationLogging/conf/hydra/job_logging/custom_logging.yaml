@@ -1,0 +1,47 @@
+# Hydra job_logging override pulled in by the `defaults` list in
+# conf/config.yaml:
+#
+#   defaults:
+#     - _self_
+#     - override hydra/job_logging: custom_logging
+#
+# Using `override` (instead of an inline `hydra: job_logging: ...` in
+# config.yaml) REPLACES Hydra's built-in default config entirely.
+#
+# Why this matters: the built-in default has
+#     handlers.console.stream: ext://sys.stdout
+# and Hydra deep-merges inline overrides with it. After the merge, our
+# `console` handler would still carry `stream: ext://sys.stdout`, which
+# dictConfig then passes to `RichHandler(...)`. RichHandler doesn't take a
+# `stream` kwarg, so you get:
+#     TypeError: RichHandler.__init__() got an unexpected keyword
+#                argument 'stream'
+# The `defaults`/`override` mechanism here sidesteps the merge entirely.
+
+version: 1
+
+formatters:
+  simple:
+    format: '%(message)s'
+  detailed:
+    format: '%(levelname)s - %(asctime)s - %(name)s - %(message)s'
+
+handlers:
+  console:
+    class: rich.logging.RichHandler
+    formatter: simple
+    level: INFO
+    markup: true
+  file:
+    class: logging.handlers.RotatingFileHandler
+    formatter: detailed
+    filename: ${hydra.runtime.output_dir}/main.log
+    maxBytes: 10485760
+    backupCount: 5
+    level: DEBUG
+
+root:
+  level: DEBUG
+  handlers: [console, file]
+
+disable_existing_loggers: false
