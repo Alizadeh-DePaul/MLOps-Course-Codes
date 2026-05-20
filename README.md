@@ -12,17 +12,18 @@ Reference code, starter files, and exercise scaffolding for **SE 489: Machine Le
 MLOps-Course-Codes/
 ├── Exercises/                  ← starter code students work on (tracked)
 │   ├── GoodCodingPractices/        Week 3
-│   ├── Reproducibility/            Week 3
+│   ├── Reproducibility/            Week 3   (supplementary code)
 │   ├── DataVersionControl/         Week 3
-│   ├── ApplicationLogging/         Week 4
 │   ├── Hydra/                      Week 4
 │   ├── Docker/                     Week 4
-│   ├── MLCodeDebugging/            Week 5
-│   ├── PerformanceProfiling/       Week 5/6
-│   ├── GCP Artifact Registry/
-│   ├── GitHubActions/              Week 8
+│   ├── MLCodeDebugging/            Week 5 / 6
+│   ├── PerformanceProfiling/       Week 5 / 6
+│   ├── ApplicationLogging/         Week 7
+│   ├── WandB/                      Week 7
+│   ├── MLflow/                     Week 7
 │   ├── PythonUnitTesting/          Week 8
-│   └── MLflow/
+│   ├── GitHubActions/              Week 8
+│   └── GCP Artifact Registry/      Week 9 / 10
 ├── handson-ml3/                ← supplementary notebooks from Géron's book
 ├── intro-to-pytorch/           ← optional PyTorch primers
 ├── data/                       ← small sample datasets used by exercises
@@ -35,20 +36,40 @@ Each exercise folder under `Exercises/` is self-contained: a short README pointi
 
 ## Exercises at a glance
 
+The table below mirrors the canonical schedule from the course's Week-by-Week page. Rows marked **_starter coming_** are exercises that are taught from the course site but don't have starter code in this repo yet.
+
 | Week | Topic | Folder |
 | :---: | --- | --- |
+| 1 | IDE setup | _starter coming_ |
+| 1 | Dependency Manager | _starter coming_ |
+| 2 | Git & GitHub for MLOps | _starter coming_ |
+| 2 | Code Structure with Cookiecutter | _starter coming_ |
 | 3 | Good Coding Practices | [`Exercises/GoodCodingPractices/`](Exercises/GoodCodingPractices/) |
-| 3 | Reproducibility | [`Exercises/Reproducibility/`](Exercises/Reproducibility/) |
+| 3 | Reproducibility (supplementary code) | [`Exercises/Reproducibility/`](Exercises/Reproducibility/) |
 | 3 | Data Version Control | [`Exercises/DataVersionControl/`](Exercises/DataVersionControl/) |
-| 4 | Application Logging | [`Exercises/ApplicationLogging/`](Exercises/ApplicationLogging/) |
 | 4 | Hydra (Configuration Management) | [`Exercises/Hydra/`](Exercises/Hydra/) |
 | 4 | Docker | [`Exercises/Docker/`](Exercises/Docker/) |
-| 5 | ML Code Debugging | [`Exercises/MLCodeDebugging/`](Exercises/MLCodeDebugging/) |
+| 5 / 6 | ML Code Debugging | [`Exercises/MLCodeDebugging/`](Exercises/MLCodeDebugging/) |
 | 5 / 6 | Python and ML Code Performance Profiling | [`Exercises/PerformanceProfiling/`](Exercises/PerformanceProfiling/) |
-| — | GCP Artifact Registry | [`Exercises/GCP Artifact Registry/`](Exercises/GCP%20Artifact%20Registry/) |
+| 7 | Application Logging in Python | [`Exercises/ApplicationLogging/`](Exercises/ApplicationLogging/) |
+| 7 | Experiment Tracking with WandB | [`Exercises/WandB/`](Exercises/WandB/) |
+| 7 | Experiment Tracking with MLflow | [`Exercises/MLflow/`](Exercises/MLflow/) |
 | 8 | Python Unit Testing | [`Exercises/PythonUnitTesting/`](Exercises/PythonUnitTesting/) |
 | 8 | GitHub Actions (CI) | [`Exercises/GitHubActions/`](Exercises/GitHubActions/) |
-| — | MLflow | [`Exercises/MLflow/`](Exercises/MLflow/) |
+| 8 | Pre-commit | _starter coming_ |
+| 8 | Continuous Docker Building | _starter coming_ |
+| 9 / 10 | Continuous Machine Learning (CML) | _starter coming_ |
+| 9 / 10 | Streamlit UI and HuggingFace Deployment | _starter coming_ |
+| 9 / 10 | Setting up Google Cloud Platform | _starter coming_ |
+| 9 / 10 | GCP Identity and Access Management (IAM) | _starter coming_ |
+| 9 / 10 | Using GCP: Compute Engine | _starter coming_ |
+| 9 / 10 | Using GCP: Data | _starter coming_ |
+| 9 / 10 | Using GCP: Artifact Registry | [`Exercises/GCP Artifact Registry/`](Exercises/GCP%20Artifact%20Registry/) |
+| 9 / 10 | Using GCP: Training Models | _starter coming_ |
+| 9 / 10 | API and Requests | _starter coming_ |
+| 9 / 10 | FastAPI Application | _starter coming_ |
+| 9 / 10 | Deployment: GCP Cloud Functions | _starter coming_ |
+| 9 / 10 | Deployment: GCP Cloud Run | _starter coming_ |
 
 ---
 
