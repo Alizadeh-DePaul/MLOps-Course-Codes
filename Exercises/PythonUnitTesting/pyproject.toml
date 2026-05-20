@@ -1,0 +1,98 @@
+[project]
+name = "python-unit-testing"
+version = "0.1.0"
+description = "Starter code for the SE 489 Python Unit Testing exercise"
+requires-python = ">=3.11,<3.12"
+
+# Base dependencies. torch is pulled from the cpu wheel index by default
+# (see [tool.uv.sources] below) so the install works on any laptop without
+# a GPU. Override with --extra cuda if you have one.
+dependencies = [
+    "torchvision>=0.17",
+    "numpy>=1.26",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "coverage>=7.5",
+]
+
+[project.optional-dependencies]
+cpu = ["torch>=2.2"]
+cuda = ["torch>=2.2"]
+
+dev = [
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+# ---------------------------------------------------------------------------
+# Pytest configuration
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+# Make the package root importable for `from models...` and `from training...`
+pythonpath = ["."]
+
+# ---------------------------------------------------------------------------
+# Coverage configuration (sub-exercise 7 + 9)
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+# Only measure code under models/ and training/. We don't need coverage
+# numbers for the tests themselves.
+source = ["models", "training"]
+branch = true
+
+[tool.coverage.report]
+# Sub-exercise 9: exclude files we don't care about from the report.
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+omit = [
+    "tests/*",
+    "*/__init__.py",
+]
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# ---------------------------------------------------------------------------
+# Ruff (light config so students aren't fighting the linter while learning
+# pytest)
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
+
+# ---------------------------------------------------------------------------
+# uv: torch from the right wheel index based on which extra is active.
+# ---------------------------------------------------------------------------
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu",   extra = "cpu" },
+    { index = "pytorch-cu128", extra = "cuda" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "cuda" },
+    ],
+]

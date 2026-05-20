@@ -14,6 +14,9 @@ log/               # tensorboard_trace_handler output (.pt.trace.json)
 profiler/          # generic profiler-output catch-all
 trace.json         # export_chrome_trace output
 
+# --- Per-exercise downloaded datasets (PythonUnitTesting downloads MNIST) ----
+Exercises/PythonUnitTesting/data/
+
 # --- Python / tooling --------------------------------------------------------
 __pycache__/
 *.py[cod]
