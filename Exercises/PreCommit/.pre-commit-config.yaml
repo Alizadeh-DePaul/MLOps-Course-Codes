@@ -1,0 +1,27 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+#
+# This is the STARTER config for the Pre-commit exercise. It contains only the
+# four hooks that `pre-commit sample-config` produces. Your job in the exercise
+# is to:
+#   1. Run these four hooks and read what they do.
+#   2. Add at least one more hook from pre-commit/pre-commit-hooks.
+#   3. Add the ruff hook from astral-sh/ruff-pre-commit so the linter runs too.
+#   4. Try `pre-commit autoupdate` to see how hook versions get bumped.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  # TODO (step 7): add the ruff pre-commit hook here.
+  # Pin to the same ruff version as your dev environment for reproducibility.
+  # - repo: https://github.com/astral-sh/ruff-pre-commit
+  #   rev: v0.15.13
+  #   hooks:
+  #     - id: ruff
+  #       args: [--fix]
+  #     - id: ruff-format

@@ -1,0 +1,33 @@
+[project]
+name = "pre-commit-exercise"
+version = "0.1.0"
+description = "Starter code for the SE 489 Pre-commit exercise"
+requires-python = ">=3.11,<3.12"
+
+# ---------------------------------------------------------------------------
+# Ruff: linter + formatter (needed by the ruff pre-commit hook in step 7).
+# Docs: https://docs.astral.sh/ruff/
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort (import ordering)
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+]
+
+# ---------------------------------------------------------------------------
+# mypy: optional — not used by the starter config, but configured here so
+# students who want to add the mypy pre-commit hook later don't have to
+# write the config from scratch.
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+strict = false
+pretty = true
