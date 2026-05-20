@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "continuous-docker-building"
+version = "0.1.0"
+description = "SE 489 Week 8 starter — Continuous Docker Building."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "numpy>=2.0,<3",
+    "rich>=13,<14",
+]
+
+[tool.setuptools]
+py-modules = ["app"]

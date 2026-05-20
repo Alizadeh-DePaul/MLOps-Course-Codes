@@ -1,0 +1,28 @@
+# VCS
+.git
+.gitignore
+.gitattributes
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Python noise
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual envs — never bake these into an image
+.venv/
+venv/
+env/
+
+# Local artifacts
+*.log
+*.png
+*.npy
+.DS_Store
