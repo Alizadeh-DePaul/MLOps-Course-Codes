@@ -1,0 +1,73 @@
+[project]
+name = "github-actions-exercise"
+version = "0.1.0"
+description = "Starter code for the SE 489 GitHub Actions (CI) exercise."
+requires-python = ">=3.11,<3.12"
+
+# Runtime + test dependencies. Kept intentionally small so the install step
+# in CI is fast and students don't spend the lesson waiting on pip resolution.
+dependencies = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "coverage>=7.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+# ---------------------------------------------------------------------------
+# Pytest configuration
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+# Make `simple_mlops` importable without `pip install -e .`
+pythonpath = ["."]
+
+# ---------------------------------------------------------------------------
+# Coverage configuration
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["simple_mlops"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# ---------------------------------------------------------------------------
+# Ruff (lint + format). Kept light so students aren't fighting the linter
+# while learning workflows.
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ---------------------------------------------------------------------------
+# Mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+strict = false
+# Light mode: warn on obvious issues, don't demand annotations on every test.
+warn_unused_ignores = true
+warn_redundant_casts = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false

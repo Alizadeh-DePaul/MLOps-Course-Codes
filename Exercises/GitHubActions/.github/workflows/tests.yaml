@@ -1,0 +1,41 @@
+name: Run tests
+
+# Trigger the workflow on every push to main and on every PR opened against main.
+# If your default branch is named something other than `main`, replace it below.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull the repo contents into the runner.
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # 2. Install uv (Astral's fast Python package manager) and pin a uv version
+      #    so CI runs are reproducible. uv is then used for everything below.
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
+        with:
+          # Enable uv's built-in cache, keyed on the uv.lock file so the cache
+          # invalidates only when dependencies change.
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      # 3. Install Python 3.11 via uv (faster than actions/setup-python and
+      #    guarantees the same Python on every runner OS).
+      - name: Set up Python 3.11
+        run: uv python install 3.11
+
+      # 4. Install all dependencies, locked to whatever is in uv.lock.
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      # 5. Run pytest.
+      - name: Test with pytest
+        run: uv run pytest -v

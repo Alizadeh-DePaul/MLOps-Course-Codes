@@ -1,0 +1,44 @@
+name: Code checks
+
+# Runs ruff (lint + format) and mypy (type-check) on every push and PR.
+# This is the workflow you'll modify in sub-exercise 11.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Set up Python 3.11
+        run: uv python install 3.11
+
+      # The dev extra pulls in ruff and mypy. --frozen pins to uv.lock.
+      - name: Install dependencies (with dev extras)
+        run: uv sync --frozen --extra dev
+
+      # ruff check: lint rules (E, W, F, I, UP). Fails on any violation.
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      # ruff format --check: enforces formatting without writing changes.
+      # Drop `--check` if you'd rather have CI auto-format and open a PR.
+      - name: Ruff format check
+        run: uv run ruff format --check .
+
+      # mypy: static type checking. Configured loosely in pyproject.toml so
+      # this passes out of the box; tighten as your project matures.
+      - name: Mypy
+        run: uv run mypy simple_mlops

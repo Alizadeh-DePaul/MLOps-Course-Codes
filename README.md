@@ -20,7 +20,8 @@ MLOps-Course-Codes/
 │   ├── MLCodeDebugging/            Week 5
 │   ├── PerformanceProfiling/       Week 5/6
 │   ├── GCP Artifact Registry/
-│   ├── Github Actions/
+│   ├── GitHubActions/              Week 8
+│   ├── PythonUnitTesting/          Week 8
 │   └── MLflow/
 ├── handson-ml3/                ← supplementary notebooks from Géron's book
 ├── intro-to-pytorch/           ← optional PyTorch primers
@@ -45,7 +46,8 @@ Each exercise folder under `Exercises/` is self-contained: a short README pointi
 | 5 | ML Code Debugging | [`Exercises/MLCodeDebugging/`](Exercises/MLCodeDebugging/) |
 | 5 / 6 | Python and ML Code Performance Profiling | [`Exercises/PerformanceProfiling/`](Exercises/PerformanceProfiling/) |
 | — | GCP Artifact Registry | [`Exercises/GCP Artifact Registry/`](Exercises/GCP%20Artifact%20Registry/) |
-| — | GitHub Actions | [`Exercises/Github Actions/`](Exercises/Github%20Actions/) |
+| 8 | Python Unit Testing | [`Exercises/PythonUnitTesting/`](Exercises/PythonUnitTesting/) |
+| 8 | GitHub Actions (CI) | [`Exercises/GitHubActions/`](Exercises/GitHubActions/) |
 | — | MLflow | [`Exercises/MLflow/`](Exercises/MLflow/) |
 
 ---
