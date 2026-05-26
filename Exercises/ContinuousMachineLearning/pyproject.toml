@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "continuous-machine-learning"
+version = "0.1.0"
+description = "SE 489 Week 9 starter - Continuous Machine Learning with CML."
+requires-python = ">=3.11,<3.12"
+
+# Tiny, fast-installing, no-torch dependencies. The model trains in well
+# under a second so the CI budget stays on the *pipeline*, not the model.
+dependencies = [
+    "scikit-learn>=1.5,<2",
+    "matplotlib>=3.8,<4",
+    "numpy>=1.26,<3",
+]
+
+[tool.setuptools]
+packages = ["simple_mlops"]

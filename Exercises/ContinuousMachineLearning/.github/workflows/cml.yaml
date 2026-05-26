@@ -1,0 +1,85 @@
+# Continuous Machine Learning - retrain the model on every push to main and
+# every PR, and post a CML report (classification report + confusion matrix)
+# as a comment on the PR.
+#
+# Required repository settings:
+#   Settings -> Actions -> General -> Workflow permissions
+#     -> "Read and write permissions" must be selected so the
+#        github-actions[bot] can post the PR comment using the
+#        auto-provided GITHUB_TOKEN.
+#
+# No external secrets are required for the basic exercise. The optional
+# DVC+S3 sub-exercise needs AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY -
+# see Exercises-Solutions/ContinuousMachineLearning/cml_with_dvc_solution.yaml.
+
+name: Continuous Machine Learning
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# The default GITHUB_TOKEN only has read access on many repos. CML needs
+# pull-requests:write so it can post the report as a PR comment.
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  train-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull the repo contents into the runner.
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # 2. Install uv (Astral's fast Python package manager) so the install
+      #    step is fast and cacheable.
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
+        with:
+          enable-cache: true
+
+      # 3. Install Python 3.11 via uv (matches the course-wide default).
+      - name: Set up Python 3.11
+        run: uv python install 3.11
+
+      # 4. Install CML (provides the `cml` CLI). v2 ships pre-built binaries
+      #    and runs on Node 20/24; v1 is deprecated.
+      - name: Set up CML
+        uses: iterative/setup-cml@v2
+
+      # 5. Install the project's Python dependencies into the runner's
+      #    system Python (no venv needed - the runner is throwaway).
+      - name: Install dependencies
+        run: uv pip install --system -e .
+
+      # 6. Train the model. Produces classification_report.txt and
+      #    confusion_matrix.png in the working directory.
+      - name: Train model
+        run: python simple_mlops/train_model_cml.py
+
+      # 7. Assemble a Markdown report and post it as a PR comment.
+      #
+      #    `cml comment create --publish report.md` does two things:
+      #      a) Uploads any images referenced in report.md to CML's
+      #         asset CDN and rewrites the markdown to point at them.
+      #      b) Posts the rendered report as a comment on the PR
+      #         (or the commit, if there's no associated PR).
+      - name: Write CML report
+        env:
+          # GITHUB_TOKEN is auto-provided per workflow run; no secrets to set.
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "## Model performance report" >> report.md
+          echo "" >> report.md
+          echo "### Classification report" >> report.md
+          echo '```' >> report.md
+          cat classification_report.txt >> report.md
+          echo '```' >> report.md
+          echo "" >> report.md
+          echo "### Confusion matrix" >> report.md
+          echo '![](./confusion_matrix.png)' >> report.md
+          cml comment create --publish report.md
