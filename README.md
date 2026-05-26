@@ -23,6 +23,7 @@ MLOps-Course-Codes/
 │   ├── MLflow/                     Week 7
 │   ├── PythonUnitTesting/          Week 8
 │   ├── GitHubActions/              Week 8
+│   ├── StreamlitHuggingFace/       Week 9 / 10
 │   └── GCP Artifact Registry/      Week 9 / 10
 ├── handson-ml3/                ← supplementary notebooks from Géron's book
 ├── intro-to-pytorch/           ← optional PyTorch primers
@@ -59,7 +60,7 @@ The table below mirrors the canonical schedule from the course's Week-by-Week pa
 | 8 | Pre-commit | _starter coming_ |
 | 8 | Continuous Docker Building | _starter coming_ |
 | 9 / 10 | Continuous Machine Learning (CML) | _starter coming_ |
-| 9 / 10 | Streamlit UI and HuggingFace Deployment | _starter coming_ |
+| 9 / 10 | Streamlit UI and HuggingFace Deployment | [`Exercises/StreamlitHuggingFace/`](Exercises/StreamlitHuggingFace/) |
 | 9 / 10 | Setting up Google Cloud Platform | _starter coming_ |
 | 9 / 10 | GCP Identity and Access Management (IAM) | _starter coming_ |
 | 9 / 10 | Using GCP: Compute Engine | _starter coming_ |

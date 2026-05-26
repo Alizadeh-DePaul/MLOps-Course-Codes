@@ -1,0 +1,45 @@
+[project]
+name = "streamlit-huggingface"
+version = "0.1.0"
+description = "Streamlit + Hugging Face Spaces deployment exercise for SE 489 MLOps."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "streamlit>=1.50,<2",
+    "torch>=2.4,<3",
+    "torchvision>=0.19,<1",
+    "pillow>=10",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "plotly>=5.20",
+    "gradio>=5.0,<6",
+    "huggingface_hub>=0.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.7",
+    "mypy>=1.11",
+    "pytest>=8.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["app", "gradio_app", "train_model"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

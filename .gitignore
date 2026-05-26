@@ -17,6 +17,14 @@ trace.json         # export_chrome_trace output
 # --- Per-exercise downloaded datasets (PythonUnitTesting downloads MNIST) ----
 Exercises/PythonUnitTesting/data/
 
+# --- Streamlit / HF deployment artifacts (StreamlitHuggingFace exercise) -----
+# Trained PyTorch weights are committed separately to the HF Space, not to git.
+*.pth
+# Streamlit Cloud / HF Spaces local secrets file.
+.streamlit/secrets.toml
+# CIFAR-10 dataset downloaded by train_model.py.
+Exercises/StreamlitHuggingFace/data/
+
 # --- Python / tooling --------------------------------------------------------
 __pycache__/
 *.py[cod]
