@@ -1,0 +1,54 @@
+# Cloud Build configuration for the Artifact Registry exercise.
+#
+# Two steps: build the image, then push it to the regional Artifact Registry
+# repository. The image is tagged with both the explicit user-supplied tag
+# (_TAG, default "v1") and the short commit SHA so you can trace any image
+# back to the commit it was built from.
+#
+# Substitutions
+#   _REGION   GCP region of the Artifact Registry repo, e.g. us-central1
+#   _REPO     Name of the Artifact Registry repository, e.g. mlops489-docker
+#   _IMAGE    Image name inside the repo, e.g. digits-svc
+#   _TAG      Human-friendly tag, e.g. v1
+# Built-in
+#   $PROJECT_ID    Active GCP project (set by Cloud Build)
+#   $SHORT_SHA     7-char commit SHA (set when triggered from a git push)
+
+substitutions:
+  _REGION: us-central1
+  _REPO: mlops489-docker
+  _IMAGE: digits-svc
+  _TAG: v1
+
+steps:
+  # Build the image with two tags so callers can refer to either the explicit
+  # release tag (v1) or the commit it came from. The `gcr.io/cloud-builders/docker`
+  # builder still works post-GCR-shutdown; Google explicitly kept it serving
+  # via Artifact Registry's gcr.io compatibility shim.
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${_TAG}'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${SHORT_SHA}'
+      - '.'
+
+  # Push the image (both tags) to the regional Artifact Registry host.
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '--all-tags'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}'
+
+# Recording the image in the `images` block makes it show up in the build
+# detail page and links the build to the resulting artifact.
+images:
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${_TAG}'
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${SHORT_SHA}'
+
+# Cloud Logging only (no Cloud Storage logs bucket needed). Required if your
+# build does not have a `logs_bucket` set and you are not using a custom
+# service account with the legacy storage roles.
+options:
+  logging: CLOUD_LOGGING_ONLY

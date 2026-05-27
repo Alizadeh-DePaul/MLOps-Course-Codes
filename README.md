@@ -25,7 +25,9 @@ MLOps-Course-Codes/
 │   ├── GitHubActions/              Week 8
 │   ├── StreamlitHuggingFace/       Week 9 / 10
 │   ├── SettingUpGCP/               Week 9 / 10
-│   └── GCP Artifact Registry/      Week 9 / 10
+│   ├── GCPComputeEngine/           Week 9 / 10
+│   ├── UsingGCPData/               Week 9 / 10
+│   └── GCPArtifactRegistry/        Week 9 / 10
 ├── handson-ml3/                ← supplementary notebooks from Géron's book
 ├── intro-to-pytorch/           ← optional PyTorch primers
 ├── data/                       ← small sample datasets used by exercises
@@ -63,10 +65,10 @@ The table below mirrors the canonical schedule from the course's Week-by-Week pa
 | 9 / 10 | Continuous Machine Learning (CML) | _starter coming_ |
 | 9 / 10 | Streamlit UI and HuggingFace Deployment | [`Exercises/StreamlitHuggingFace/`](Exercises/StreamlitHuggingFace/) |
 | 9 / 10 | Setting up Google Cloud Platform | [`Exercises/SettingUpGCP/`](Exercises/SettingUpGCP/) |
-| 9 / 10 | GCP Identity and Access Management (IAM) | _starter coming_ |
-| 9 / 10 | Using GCP: Compute Engine | _starter coming_ |
-| 9 / 10 | Using GCP: Data | _starter coming_ |
-| 9 / 10 | Using GCP: Artifact Registry | [`Exercises/GCP Artifact Registry/`](Exercises/GCP%20Artifact%20Registry/) |
+| 9 / 10 | GCP Identity and Access Management (IAM) | _setup-only exercise; no starter code_ |
+| 9 / 10 | Using GCP: Compute Engine | [`Exercises/GCPComputeEngine/`](Exercises/GCPComputeEngine/) |
+| 9 / 10 | Using GCP: Data | [`Exercises/UsingGCPData/`](Exercises/UsingGCPData/) |
+| 9 / 10 | Using GCP: Artifact Registry | [`Exercises/GCPArtifactRegistry/`](Exercises/GCPArtifactRegistry/) |
 | 9 / 10 | Using GCP: Training Models | _starter coming_ |
 | 9 / 10 | API and Requests | _starter coming_ |
 | 9 / 10 | FastAPI Application | _starter coming_ |
