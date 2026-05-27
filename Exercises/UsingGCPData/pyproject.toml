@@ -1,0 +1,21 @@
+[project]
+name = "using-gcp-data"
+version = "0.1.0"
+description = "SE 489 - Using GCP: Cloud Storage as a DVC remote with version_aware enabled."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+
+# Core deps for this exercise. The dvc[gs] extra pulls in the official
+# gcsfs / google-cloud-storage stack DVC uses to talk to Cloud Storage.
+# Students install with `uv pip install -e .`
+# (Plain-pip alternative: `pip install -e .`)
+dependencies = [
+    "dvc[gs]>=3.60,<4",
+    "google-cloud-storage>=3.0",
+]
+
+[project.optional-dependencies]
+# Windows users occasionally need pywin32 for dvc's file locking. If `dvc add`
+# errors out with something like "ImportError: No module named win32file",
+# install the windows extra:  pip install -e ".[windows]"
+windows = ["pywin32; platform_system=='Windows'"]

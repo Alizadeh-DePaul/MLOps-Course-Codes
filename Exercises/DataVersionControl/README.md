@@ -65,3 +65,9 @@ need:
    automatically.
 2. **Commit the `.dvc` metafiles** (`data.dvc`, `.dvc/config`) so teammates can `dvc pull`.
 3. **Never commit `gdrive-user-credentials.json`** or your OAuth client secret to Git.
+
+## Up next (Week 9 / 10)
+
+In `Exercises/UsingGCPData/` you'll switch this same DVC setup from a Google
+Drive remote to a Google Cloud Storage bucket with `version_aware` turned on.
+The data flow is identical; only the remote backend changes.

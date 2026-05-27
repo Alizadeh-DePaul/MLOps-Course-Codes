@@ -162,3 +162,9 @@ pre-authenticated. Open the GCP Console and click the small terminal icon
 in the top-right header. Cloud Shell has a 50-hour weekly quota and a
 40-minute inactivity timeout, so it's fine for tutorials but not for daily
 development work.
+
+## Up next
+
+`Exercises/UsingGCPData/` — turn a Google Cloud Storage bucket into your
+DVC remote with `version_aware` turned on. The natural follow-up once you
+have a VM that needs persistent, versioned data access.

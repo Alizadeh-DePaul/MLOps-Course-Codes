@@ -8,6 +8,21 @@ mlruns/
 outputs/           # Hydra run-scoped output folders (per-exercise)
 multirun/          # Hydra --multirun output folders
 
+# --- DVC artifacts (UsingGCPData / DataVersionControl) -----------------------
+# The .dvc/config file IS tracked (it documents the remote); the cache and
+# temp folders are not. data.dvc (the pointer) IS tracked.
+.dvc/cache/
+.dvc/tmp/
+
+# --- GCP service-account keys (never commit) ---------------------------------
+# Pattern A in UsingGCPData uses keyless attached service accounts on VMs.
+# Pattern B (downloaded JSON key) is discouraged but supported; if you do
+# create a key file, it MUST stay out of git.
+*-service-account*.json
+*-sa.json
+sa-key.json
+gcp-credentials.json
+
 # --- Profiler artifacts (per-exercise PerformanceProfiling) ------------------
 *.prof             # cProfile dumps (e.g. vae.prof)
 log/               # tensorboard_trace_handler output (.pt.trace.json)
