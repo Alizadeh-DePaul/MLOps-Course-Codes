@@ -1,0 +1,7 @@
+# Model produced by train_model.py — upload to GCS, never commit.
+model.pkl
+*.pkl
+
+# Python / tooling
+__pycache__/
+.venv/

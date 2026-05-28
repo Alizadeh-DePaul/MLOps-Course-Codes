@@ -45,6 +45,11 @@ Exercises/FastAPIApplication/image.jpg
 Exercises/FastAPIApplication/image_resize.jpg
 Exercises/FastAPIApplication/database.csv
 
+# --- GCP Cloud Functions exercise (train_model.py writes a local model.pkl) --
+# Upload model.pkl to a bucket; never commit it. The per-folder .gitignore also
+# covers this, but pin it here so it can't slip in from the repo root.
+Exercises/DeploymentGCPCloudFunctions/model.pkl
+
 # --- Streamlit / HF deployment artifacts (StreamlitHuggingFace exercise) -----
 # Trained PyTorch weights are committed separately to the HF Space, not to git.
 *.pth
