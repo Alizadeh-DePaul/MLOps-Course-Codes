@@ -1,0 +1,17 @@
+[project]
+name = "gcp-training-models-exercise"
+version = "0.1.0"
+description = "Tiny PyTorch trainer for the SE 489 GCP Training Models exercise (Compute Engine + Vertex AI custom job)"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    # PyTorch CPU is enough for the synthetic-linear-regression demo.
+    # The GPU custom job uses the same image (PyTorch detects CUDA at runtime).
+    "torch>=2.4,<3",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["train"]

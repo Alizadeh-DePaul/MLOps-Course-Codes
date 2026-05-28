@@ -1,0 +1,5 @@
+# Runtime deps for the training image. Kept in plain requirements.txt form
+# so Cloud Build / Vertex AI can install it without parsing pyproject.toml.
+# CPU build of PyTorch keeps the image small; CUDA is detected at runtime
+# if the job is run on a GPU machine.
+torch>=2.4,<3

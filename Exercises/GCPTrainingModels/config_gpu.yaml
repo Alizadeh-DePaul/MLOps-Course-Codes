@@ -1,0 +1,27 @@
+# Vertex AI CustomJob spec (GPU).
+#
+# Requires GPU quota in us-central1 (see Section 2 of the IAM exercise for
+# how to request it). Submit with:
+#   gcloud ai custom-jobs create \
+#       --region=us-central1 \
+#       --display-name=mlops489-train-gpu \
+#       --config=config_gpu.yaml
+#
+# Replace <project-id> with your real project ID, or let the demo runner do
+# it for you in a temp copy.
+
+workerPoolSpecs:
+  - machineSpec:
+      machineType: n1-standard-4
+      # acceleratorType and acceleratorCount go on SEPARATE lines.
+      # Older course materials had these collapsed into one line, which is
+      # invalid YAML and would fail submission with a parse error.
+      acceleratorType: NVIDIA_TESLA_T4
+      acceleratorCount: 1
+    replicaCount: 1
+    containerSpec:
+      imageUri: us-central1-docker.pkg.dev/<project-id>/mlops489-docker/digits-trainer:v1
+      args:
+        - --epochs=20
+        - --batch-size=64
+        - --lr=0.01

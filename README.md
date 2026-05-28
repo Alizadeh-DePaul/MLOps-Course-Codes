@@ -27,7 +27,8 @@ MLOps-Course-Codes/
 │   ├── SettingUpGCP/               Week 9 / 10
 │   ├── GCPComputeEngine/           Week 9 / 10
 │   ├── UsingGCPData/               Week 9 / 10
-│   └── GCPArtifactRegistry/        Week 9 / 10
+│   ├── GCPArtifactRegistry/        Week 9 / 10
+│   └── GCPTrainingModels/          Week 9 / 10
 ├── handson-ml3/                ← supplementary notebooks from Géron's book
 ├── intro-to-pytorch/           ← optional PyTorch primers
 ├── data/                       ← small sample datasets used by exercises
@@ -69,7 +70,7 @@ The table below mirrors the canonical schedule from the course's Week-by-Week pa
 | 9 / 10 | Using GCP: Compute Engine | [`Exercises/GCPComputeEngine/`](Exercises/GCPComputeEngine/) |
 | 9 / 10 | Using GCP: Data | [`Exercises/UsingGCPData/`](Exercises/UsingGCPData/) |
 | 9 / 10 | Using GCP: Artifact Registry | [`Exercises/GCPArtifactRegistry/`](Exercises/GCPArtifactRegistry/) |
-| 9 / 10 | Using GCP: Training Models | _starter coming_ |
+| 9 / 10 | Using GCP: Training Models | [`Exercises/GCPTrainingModels/`](Exercises/GCPTrainingModels/) |
 | 9 / 10 | API and Requests | _starter coming_ |
 | 9 / 10 | FastAPI Application | _starter coming_ |
 | 9 / 10 | Deployment: GCP Cloud Functions | _starter coming_ |
