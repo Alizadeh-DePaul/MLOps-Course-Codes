@@ -32,6 +32,9 @@ trace.json         # export_chrome_trace output
 # --- Per-exercise downloaded datasets (PythonUnitTesting downloads MNIST) ----
 Exercises/PythonUnitTesting/data/
 
+# --- API and Requests exercise (step 3 downloads a PNG into the folder) ------
+Exercises/ApiAndRequests/img.png
+
 # --- Streamlit / HF deployment artifacts (StreamlitHuggingFace exercise) -----
 # Trained PyTorch weights are committed separately to the HF Space, not to git.
 *.pth
