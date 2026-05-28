@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 # Python 3.11 is the course-wide default. Slim + bookworm keep the image small.
-# Vertex AI custom jobs accept any container image as long as it has an
+# Agent Platform custom jobs accept any container image as long as it has an
 # ENTRYPOINT or CMD that starts the training script.
 FROM python:3.11-slim-bookworm
 
@@ -29,6 +29,6 @@ COPY train.py train.py
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install --system -r requirements.txt
 
-# `-u` flushes stdout/stderr unbuffered so Vertex AI's stream-logs picks up
+# `-u` flushes stdout/stderr unbuffered so Agent Platform's stream-logs picks up
 # every line as it is printed, not in 4 KB chunks.
 ENTRYPOINT ["python", "-u", "train.py"]

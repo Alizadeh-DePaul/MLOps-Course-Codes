@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Exercises/GCPTrainingModels/demo.sh - bash end-to-end runner.
 # Creates a uniquely-named Artifact Registry repository, builds and pushes
-# the training image via Cloud Build, submits a Vertex AI custom job,
+# the training image via Cloud Build, submits an Agent Platform custom job,
 # streams its logs, and ALWAYS cleans up at the end (cancels the job if
 # still running, deletes the repository) - even if a step in the middle
 # fails.
@@ -43,7 +43,7 @@ cleanup() {
     echo
     echo "---- Cleanup ----"
     if [[ -n "${JOB_ID}" ]]; then
-        echo "Cancelling Vertex AI job ${JOB_ID} if still running..."
+        echo "Cancelling Agent Platform job ${JOB_ID} if still running..."
         gcloud ai custom-jobs cancel "${JOB_ID}" --region="${REGION}" --quiet || true
     fi
     echo "Deleting Artifact Registry repo ${REPO}..."
@@ -78,7 +78,7 @@ gcloud builds submit . \
 # 4. Render config_cpu.yaml with the real project ID and demo repo, submit
 # ---------------------------------------------------------------------------
 echo
-echo "---- Submitting Vertex AI custom job ----"
+echo "---- Submitting Agent Platform custom job ----"
 RENDERED_CONFIG=$(mktemp --suffix=.yaml)
 sed -e "s|<project-id>|${PROJECT_ID}|g" \
     -e "s|mlops489-docker|${REPO}|g" \
@@ -93,7 +93,7 @@ JOB_NAME=$(gcloud ai custom-jobs create \
 # `name` is a full resource path: projects/.../customJobs/<id>. Take the
 # last path segment.
 JOB_ID="${JOB_NAME##*/}"
-echo "Submitted Vertex AI job: ${JOB_ID}"
+echo "Submitted Agent Platform job: ${JOB_ID}"
 
 # ---------------------------------------------------------------------------
 # 5. Stream the job logs

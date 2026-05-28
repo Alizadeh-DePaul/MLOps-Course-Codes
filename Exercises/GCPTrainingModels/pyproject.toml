@@ -1,7 +1,7 @@
 [project]
 name = "gcp-training-models-exercise"
 version = "0.1.0"
-description = "Tiny PyTorch trainer for the SE 489 GCP Training Models exercise (Compute Engine + Vertex AI custom job)"
+description = "Tiny PyTorch trainer for the SE 489 GCP Training Models exercise (Compute Engine + Gemini Enterprise Agent Platform custom job, formerly Vertex AI)"
 requires-python = ">=3.11,<3.12"
 dependencies = [
     # PyTorch CPU is enough for the synthetic-linear-regression demo.

@@ -1,6 +1,6 @@
 # Exercises/GCPTrainingModels/demo.ps1 - Windows PowerShell end-to-end runner.
 # Creates a uniquely-named Artifact Registry repository, builds and pushes
-# the training image via Cloud Build, submits a Vertex AI custom job,
+# the training image via Cloud Build, submits an Agent Platform custom job,
 # streams its logs, and ALWAYS cleans up at the end (cancels the job if
 # still running, deletes the repository) - even if a step in the middle
 # fails.
@@ -44,7 +44,7 @@ function Invoke-Cleanup {
     Write-Host ''
     Write-Host '---- Cleanup ----'
     if (-not [string]::IsNullOrWhiteSpace($Script:JobId)) {
-        Write-Host "Cancelling Vertex AI job $($Script:JobId) if still running..."
+        Write-Host "Cancelling Agent Platform job $($Script:JobId) if still running..."
         try {
             gcloud ai custom-jobs cancel $Script:JobId --region=$Region --quiet 2>$null
         } catch {
@@ -89,7 +89,7 @@ try {
     # 4. Render config_cpu.yaml with the real project ID and demo repo
     # -----------------------------------------------------------------------
     Write-Host ''
-    Write-Host '---- Submitting Vertex AI custom job ----'
+    Write-Host '---- Submitting Agent Platform custom job ----'
     $Script:RenderedConfig = [System.IO.Path]::GetTempFileName() + '.yaml'
     (Get-Content config_cpu.yaml) `
         -replace '<project-id>', $ProjectId `
@@ -106,7 +106,7 @@ try {
     # name is a full resource path: projects/.../customJobs/<id>. Grab the
     # last segment.
     $Script:JobId = ($JobName.Trim() -split '/')[-1]
-    Write-Host "Submitted Vertex AI job: $($Script:JobId)"
+    Write-Host "Submitted Agent Platform job: $($Script:JobId)"
 
     # -----------------------------------------------------------------------
     # 5. Stream the job logs

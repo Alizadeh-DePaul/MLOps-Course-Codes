@@ -4,9 +4,9 @@ The point of this script is not the model — it is to have a small,
 dependency-light, real PyTorch training loop that:
 
   * fits in well under a minute on a CPU custom job (cheap demo),
-  * actually exercises PyTorch (so the Vertex AI worker really does load
+  * actually exercises PyTorch (so the Agent Platform worker really does load
     torch, run a backward pass, and write a checkpoint), and
-  * demonstrates the `/gcs/<bucket>/...` FUSE mount that Vertex AI custom
+  * demonstrates the `/gcs/<bucket>/...` FUSE mount that Agent Platform custom
     jobs auto-attach to the worker — pass `--gcs-checkpoint-dir` to write
     the trained weights straight to a GCS bucket without any GCS client
     library code.
@@ -105,7 +105,7 @@ def main() -> None:
         help=(
             "Optional GCS-FUSE directory to write the checkpoint to "
             "(e.g. /gcs/my-bucket/checkpoints). Only meaningful when "
-            "running inside a Vertex AI custom job; from a local "
+            "running inside an Agent Platform custom job; from a local "
             "machine the path will not exist."
         ),
     )

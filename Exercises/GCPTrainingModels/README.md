@@ -2,13 +2,24 @@
 
 **Course:** SE 489 (MLOps) (Week 9 / 10)
 
+> **Heads-up (May 2026 rename):** what this README calls **Agent Platform**
+> is the product Google previously called **Vertex AI**. Google rebranded
+> it to **Gemini Enterprise Agent Platform** at Google Cloud Next '26
+> (announced April 22, 2026; Console rollout completed May 21, 2026). The
+> `gcloud ai` CLI command group, the `aiplatform.googleapis.com` API
+> endpoint, the YAML schema, and every command in this folder were kept
+> unchanged for backward compatibility — so the demo still runs verbatim.
+> What changed is the product name and the GCP Console navigation. If you
+> Google "Vertex AI custom job" you will land on accurate tutorials for
+> this same product.
+
 A **complete, runnable** example of training a tiny PyTorch model on Google
 Cloud Platform two ways:
 
 1. **On a Compute Engine VM** with a PyTorch Deep Learning image — clone,
    install, `python train.py`. Treats the VM like your laptop.
-2. **As a Vertex AI custom job** — build the training image, push it to
-   Artifact Registry, hand Vertex AI a YAML spec, watch logs stream back.
+2. **As an Agent Platform custom job** — build the training image, push it to
+   Artifact Registry, hand Agent Platform a YAML spec, watch logs stream back.
 
 This folder ships everything you need for path #2 end-to-end. Run the demo,
 read the files, modify them; there are no fill-in-the-blank TODOs.
@@ -23,10 +34,10 @@ read the files, modify them; there are no fill-in-the-blank TODOs.
 | `requirements.txt` | Same deps in the form `pip` / Cloud Build understands directly |
 | `train.dockerfile` | Python 3.11-slim base, `uv pip install --system` with BuildKit cache, ENTRYPOINT runs `train.py` |
 | `cloudbuild.yaml` | Two-step build: `docker build`, then `docker push` to Artifact Registry |
-| `config_cpu.yaml` | Vertex AI CustomJob spec (one `n1-standard-4` worker, no GPU) |
+| `config_cpu.yaml` | Agent Platform CustomJob spec (one `n1-standard-4` worker, no GPU) |
 | `config_gpu.yaml` | Same spec with one `NVIDIA_TESLA_T4` attached |
 | `.gitignore` | Standard Python ignores |
-| `demo.nu` / `demo.sh` / `demo.ps1` | End-to-end runner: build + push image, submit Vertex AI job, stream logs, clean up |
+| `demo.nu` / `demo.sh` / `demo.ps1` | End-to-end runner: build + push image, submit Agent Platform job, stream logs, clean up |
 
 ## Prerequisites
 
@@ -51,7 +62,7 @@ If `gcloud config get-value project` does not print `mlops489`, run the
 
 ```bash
 # 1. Pick a region. us-central1 is in the free-tier region set and supports
-#    every Vertex AI machine and GPU type we use.
+#    every Agent Platform machine and GPU type we use.
 export REGION=us-central1
 export REPO=mlops489-docker
 export IMAGE=digits-trainer
@@ -67,7 +78,7 @@ gcloud builds submit . \
 PROJECT_ID=$(gcloud config get-value project)
 sed "s|<project-id>|$PROJECT_ID|g" config_cpu.yaml > /tmp/config_cpu.yaml
 
-# 4. Submit the Vertex AI custom job.
+# 4. Submit the Agent Platform custom job.
 gcloud ai custom-jobs create \
     --region=$REGION \
     --display-name=mlops489-train \
@@ -122,7 +133,7 @@ bash demo.sh         # macOS / Linux / WSL / Git Bash
 
 Each runner creates a uniquely-named Artifact Registry repo (so it does not
 collide with anything you have in production), builds and pushes the training
-image, submits a Vertex AI custom job, streams its logs to your terminal,
+image, submits an Agent Platform custom job, streams its logs to your terminal,
 then **always** cleans up — cancels any still-running job and deletes the
 throwaway repo — on the way out, even if a step in the middle fails. The
 exit code is non-zero iff anything failed.
@@ -147,7 +158,7 @@ End-to-end runtime is ~5–8 minutes (Cloud Build dominates).
                     │  config_cpu.yaml ┌──────────► imageUri
                     ▼
         ┌────────────────────────┐
-        │   Vertex AI Custom Job │
+        │   Agent Platform Custom Job │
         │   gcloud ai custom-jobs│
         │   create --config=...  │
         └───────────┬────────────┘
@@ -159,7 +170,7 @@ End-to-end runtime is ~5–8 minutes (Cloud Build dominates).
 ## Reading data from Cloud Storage
 
 `train.py` supports an optional `--gcs-checkpoint-dir` flag. When the script
-runs **inside a Vertex AI custom job**, Vertex AI auto-mounts your project's
+runs **inside an Agent Platform custom job**, Agent Platform auto-mounts your project's
 GCS buckets at `/gcs/<bucket-name>/`. So this works without any GCS client
 code:
 
@@ -176,7 +187,7 @@ entirely to write to local disk.
 
 - **Do not edit `pyproject.toml` or `requirements.txt`** unless you mean to
   change the runtime deps in the image. The pinned versions match what
-  Vertex AI's pre-built containers ship.
+  Agent Platform's pre-built containers ship.
 - **Do edit `config_cpu.yaml` / `config_gpu.yaml`** — at minimum the
   `<project-id>` placeholder in `imageUri` needs your real project ID.
   The demo runners do this substitution for you in a tmp copy; for the
@@ -184,7 +195,7 @@ entirely to write to local disk.
 - **Do not commit a JSON service-account key** to your fork. If you need
   the keyless attached-SA pattern, the exercise page and the IAM exercise
   cover it.
-- **Do not run the GPU spec without GPU quota.** Vertex AI will fail the
+- **Do not run the GPU spec without GPU quota.** Agent Platform will fail the
   job submission with a quota error if you don't have at least 1 T4 in the
   region. See the IAM exercise for the quota request flow.
 
@@ -195,7 +206,7 @@ you start in Section 1 and forget about, and (b) the storage of training
 images in Artifact Registry. After class:
 
 ```bash
-# Any Vertex AI jobs still running?
+# Any Agent Platform jobs still running?
 gcloud ai custom-jobs list --region=us-central1 \
     --filter="state:JOB_STATE_RUNNING OR state:JOB_STATE_PENDING"
 

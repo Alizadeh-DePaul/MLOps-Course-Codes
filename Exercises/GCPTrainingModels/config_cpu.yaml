@@ -1,4 +1,4 @@
-# Vertex AI CustomJob spec (CPU).
+# Gemini Enterprise Agent Platform (formerly Vertex AI) CustomJob spec — CPU.
 #
 # Submit with:
 #   gcloud ai custom-jobs create \

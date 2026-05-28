@@ -1,4 +1,4 @@
-# Vertex AI CustomJob spec (GPU).
+# Gemini Enterprise Agent Platform (formerly Vertex AI) CustomJob spec — GPU.
 #
 # Requires GPU quota in us-central1 (see Section 2 of the IAM exercise for
 # how to request it). Submit with:

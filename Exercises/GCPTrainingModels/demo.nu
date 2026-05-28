@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 # Exercises/GCPTrainingModels/demo.nu - cross-platform end-to-end runner.
 # Creates a uniquely-named Artifact Registry repository, builds and pushes
-# the training image via Cloud Build, submits a Vertex AI custom job,
+# the training image via Cloud Build, submits an Agent Platform custom job,
 # streams its logs, and ALWAYS cleans up at the end (cancels the job if
 # still running, deletes the repository) - even if a step in the middle
 # fails.
@@ -42,7 +42,7 @@ def cleanup [r: string, reg: string, jid: string] {
     print ""
     print "---- Cleanup ----"
     if ($jid | str length) > 0 {
-        print $"Cancelling Vertex AI job ($jid) if still running..."
+        print $"Cancelling Agent Platform job ($jid) if still running..."
         do { ^gcloud ai custom-jobs cancel $jid --region=$reg --quiet } | ignore
     }
     print $"Deleting Artifact Registry repo ($r)..."
@@ -82,7 +82,7 @@ try {
 # 4. Render config_cpu.yaml with the real project ID, image URI, and submit
 # ---------------------------------------------------------------------------
 print ""
-print "---- Submitting Vertex AI custom job ----"
+print "---- Submitting Agent Platform custom job ----"
 let rendered_config = (mktemp --suffix .yaml | str trim)
 open config_cpu.yaml
     | str replace --all "<project-id>" $project_id
@@ -100,7 +100,7 @@ try {
     # `name` is a full resource path: projects/.../customJobs/<id>. Grab the
     # last segment.
     $job_id = ($create_output | str trim | split row "/" | last)
-    print $"Submitted Vertex AI job: ($job_id)"
+    print $"Submitted Agent Platform job: ($job_id)"
 } catch {
     print "Job submission failed."
     cleanup $repo $region $job_id
