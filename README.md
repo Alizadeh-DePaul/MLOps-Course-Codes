@@ -23,13 +23,19 @@ MLOps-Course-Codes/
 │   ├── MLflow/                     Week 7
 │   ├── PythonUnitTesting/          Week 8
 │   ├── GitHubActions/              Week 8
+│   ├── PreCommit/                  Week 8
+│   ├── ContinuousDockerBuilding/   Week 8
+│   ├── ContinuousMachineLearning/  Week 9 / 10
 │   ├── StreamlitHuggingFace/       Week 9 / 10
 │   ├── SettingUpGCP/               Week 9 / 10
 │   ├── GCPComputeEngine/           Week 9 / 10
 │   ├── UsingGCPData/               Week 9 / 10
 │   ├── GCPArtifactRegistry/        Week 9 / 10
 │   ├── GCPTrainingModels/          Week 9 / 10
-│   └── ApiAndRequests/             Week 9 / 10
+│   ├── ApiAndRequests/             Week 9 / 10
+│   ├── FastAPIApplication/         Week 9 / 10
+│   ├── DeploymentGCPCloudFunctions/  Week 9 / 10
+│   └── DeploymentGCPCloudRun/      Week 9 / 10
 ├── handson-ml3/                ← supplementary notebooks from Géron's book
 ├── intro-to-pytorch/           ← optional PyTorch primers
 ├── data/                       ← small sample datasets used by exercises
@@ -62,9 +68,9 @@ The table below mirrors the canonical schedule from the course's Week-by-Week pa
 | 7 | Experiment Tracking with MLflow | [`Exercises/MLflow/`](Exercises/MLflow/) |
 | 8 | Python Unit Testing | [`Exercises/PythonUnitTesting/`](Exercises/PythonUnitTesting/) |
 | 8 | GitHub Actions (CI) | [`Exercises/GitHubActions/`](Exercises/GitHubActions/) |
-| 8 | Pre-commit | _starter coming_ |
-| 8 | Continuous Docker Building | _starter coming_ |
-| 9 / 10 | Continuous Machine Learning (CML) | _starter coming_ |
+| 8 | Pre-commit | [`Exercises/PreCommit/`](Exercises/PreCommit/) |
+| 8 | Continuous Docker Building | [`Exercises/ContinuousDockerBuilding/`](Exercises/ContinuousDockerBuilding/) |
+| 9 / 10 | Continuous Machine Learning (CML) | [`Exercises/ContinuousMachineLearning/`](Exercises/ContinuousMachineLearning/) |
 | 9 / 10 | Streamlit UI and HuggingFace Deployment | [`Exercises/StreamlitHuggingFace/`](Exercises/StreamlitHuggingFace/) |
 | 9 / 10 | Setting up Google Cloud Platform | [`Exercises/SettingUpGCP/`](Exercises/SettingUpGCP/) |
 | 9 / 10 | GCP Identity and Access Management (IAM) | _setup-only exercise; no starter code_ |
