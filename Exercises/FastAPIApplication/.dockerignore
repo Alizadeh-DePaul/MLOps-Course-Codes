@@ -1,0 +1,16 @@
+# Keep the build context small.
+.git/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+tests/
+# Runtime artifacts produced by the endpoints (never belong in an image).
+image.jpg
+image_resize.jpg
+database.csv
+*.egg-info/
+.DS_Store

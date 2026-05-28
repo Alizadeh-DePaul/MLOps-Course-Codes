@@ -35,6 +35,16 @@ Exercises/PythonUnitTesting/data/
 # --- API and Requests exercise (step 3 downloads a PNG into the folder) ------
 Exercises/ApiAndRequests/img.png
 
+# --- FastAPI Application exercise (endpoints write files at runtime) ----------
+# /cv_model/ writes image.jpg + image_resize.jpg; /login/ writes database.csv.
+# Match them anywhere under the exercise folder (root or app/).
+Exercises/FastAPIApplication/**/image.jpg
+Exercises/FastAPIApplication/**/image_resize.jpg
+Exercises/FastAPIApplication/**/database.csv
+Exercises/FastAPIApplication/image.jpg
+Exercises/FastAPIApplication/image_resize.jpg
+Exercises/FastAPIApplication/database.csv
+
 # --- Streamlit / HF deployment artifacts (StreamlitHuggingFace exercise) -----
 # Trained PyTorch weights are committed separately to the HF Space, not to git.
 *.pth

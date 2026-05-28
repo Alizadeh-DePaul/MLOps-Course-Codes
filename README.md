@@ -73,7 +73,7 @@ The table below mirrors the canonical schedule from the course's Week-by-Week pa
 | 9 / 10 | Using GCP: Artifact Registry | [`Exercises/GCPArtifactRegistry/`](Exercises/GCPArtifactRegistry/) |
 | 9 / 10 | Using GCP: Training Models | [`Exercises/GCPTrainingModels/`](Exercises/GCPTrainingModels/) |
 | 9 / 10 | API and Requests | [`Exercises/ApiAndRequests/`](Exercises/ApiAndRequests/) |
-| 9 / 10 | FastAPI Application | _starter coming_ |
+| 9 / 10 | FastAPI Application | [`Exercises/FastAPIApplication/`](Exercises/FastAPIApplication/) |
 | 9 / 10 | Deployment: GCP Cloud Functions | _starter coming_ |
 | 9 / 10 | Deployment: GCP Cloud Run | _starter coming_ |
 

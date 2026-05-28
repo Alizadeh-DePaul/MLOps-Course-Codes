@@ -1,0 +1,6 @@
+# Core API dependencies for the FastAPI Application exercise.
+# fastapi[standard] bundles uvicorn (the ASGI server) and the `fastapi` CLI.
+fastapi[standard]>=0.115,<1.0
+# Headless OpenCV: no system GUI libraries needed, ideal for servers/containers.
+opencv-python-headless>=4.10,<5
+pillow>=10
