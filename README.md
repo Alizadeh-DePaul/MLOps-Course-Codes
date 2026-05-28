@@ -75,7 +75,7 @@ The table below mirrors the canonical schedule from the course's Week-by-Week pa
 | 9 / 10 | API and Requests | [`Exercises/ApiAndRequests/`](Exercises/ApiAndRequests/) |
 | 9 / 10 | FastAPI Application | [`Exercises/FastAPIApplication/`](Exercises/FastAPIApplication/) |
 | 9 / 10 | Deployment: GCP Cloud Functions | [`Exercises/DeploymentGCPCloudFunctions/`](Exercises/DeploymentGCPCloudFunctions/) |
-| 9 / 10 | Deployment: GCP Cloud Run | _starter coming_ |
+| 9 / 10 | Deployment: GCP Cloud Run | [`Exercises/DeploymentGCPCloudRun/`](Exercises/DeploymentGCPCloudRun/) |
 
 ---
 

@@ -1,0 +1,58 @@
+# Cloud Build configuration for the Cloud Run deployment exercise.
+#
+# Three steps: build the image, push it to Artifact Registry, then deploy it to
+# Cloud Run. Container Registry (gcr.io/<project>/...) was shut down; images now
+# live in Artifact Registry at <region>-docker.pkg.dev/<project>/<repo>/...
+#
+# Substitutions
+#   _REGION    GCP region, e.g. us-central1
+#   _REPO      Artifact Registry repo, e.g. mlops489-docker
+#   _SERVICE   Cloud Run service + image name, e.g. cloud-run-mlops
+#   _TAG       image tag, e.g. v1
+# Built-in
+#   $PROJECT_ID   active GCP project (set by Cloud Build)
+
+substitutions:
+  _REGION: us-central1
+  _REPO: mlops489-docker
+  _SERVICE: cloud-run-mlops
+  _TAG: v1
+
+steps:
+  # Build the image. The gcr.io/cloud-builders/docker builder image still works
+  # after the GCR shutdown — Google kept the cloud-builders images serving via
+  # Artifact Registry's compatibility shim. (That is the builder, not where our
+  # image goes; our image goes to Artifact Registry below.)
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
+      - '.'
+
+  # Push the image to Artifact Registry.
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
+
+  # Deploy the freshly pushed image to Cloud Run.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE}'
+      - '--image'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+images:
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_SERVICE}:${_TAG}'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

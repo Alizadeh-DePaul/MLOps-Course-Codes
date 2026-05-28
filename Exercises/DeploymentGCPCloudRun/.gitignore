@@ -1,0 +1,4 @@
+# Python / tooling
+__pycache__/
+.venv/
+*.egg-info/
