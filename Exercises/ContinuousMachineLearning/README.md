@@ -99,9 +99,9 @@ happens automatically when GitHub Actions runs the workflow on a real
 | --- | --- | --- |
 | Checkout | `actions/checkout@v5` | Fetch the repo into the runner |
 | Install uv | `astral-sh/setup-uv@v8` | Fast, reproducible Python env |
-| Set up CML | `iterative/setup-cml@v2` | Provides the `cml` CLI |
-| Install deps | `uv pip install --system -e .` | Install the project deps |
-| Train | `python simple_mlops/train_model_cml.py` | Produces report.txt + confusion_matrix.png |
+| Set up CML | `iterative/setup-cml@v2` with `vega: false` | Provides the `cml` CLI (vega skipped to avoid canvas build failure on Ubuntu 24.04) |
+| Install deps | `uv venv --python 3.11 && uv pip install -e .` | Create venv (system Python is PEP 668 externally-managed) and install project deps |
+| Train | `source .venv/bin/activate && python simple_mlops/train_model_cml.py` | Activate venv, produce `classification_report.txt` + `confusion_matrix.png` |
 | Report | `cml comment create --publish report.md` | Posts the Markdown report as a PR comment, uploading images automatically |
 
 ## Sub-exercises (follow the exercise page)

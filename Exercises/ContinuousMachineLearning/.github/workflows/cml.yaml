@@ -48,18 +48,36 @@ jobs:
 
       # 4. Install CML (provides the `cml` CLI). v2 ships pre-built binaries
       #    and runs on Node 20/24; v1 is deprecated.
+      #
+      #    `vega: false` skips the npm install of canvas@2 + vega-cli, which
+      #    currently fails on Ubuntu 24.04 runners with Node 22 because the
+      #    canvas native build needs pixman-1 (not preinstalled) and there
+      #    is no pre-built binary for the node-v127 ABI. We don't use CML's
+      #    vega rendering in this exercise (we embed a pre-rendered PNG),
+      #    so disabling it is safe and cuts ~30s off the step.
       - name: Set up CML
         uses: iterative/setup-cml@v2
+        with:
+          vega: false
 
-      # 5. Install the project's Python dependencies into the runner's
-      #    system Python (no venv needed - the runner is throwaway).
+      # 5. Create a venv with the Python 3.11 we installed above, then
+      #    install the project into it. We do NOT use `uv pip install
+      #    --system` because Ubuntu 24.04's system Python is PEP 668
+      #    "externally managed" and uv refuses to install into it. The
+      #    venv path also pins us to Python 3.11 (the course default)
+      #    rather than picking up the runner's 3.12.
       - name: Install dependencies
-        run: uv pip install --system -e .
+        run: |
+          uv venv --python 3.11
+          uv pip install -e .
 
-      # 6. Train the model. Produces classification_report.txt and
-      #    confusion_matrix.png in the working directory.
+      # 6. Train the model. Activate the venv first so the right Python
+      #    and dependencies are on PATH. Produces classification_report.txt
+      #    and confusion_matrix.png in the working directory.
       - name: Train model
-        run: python simple_mlops/train_model_cml.py
+        run: |
+          source .venv/bin/activate
+          python simple_mlops/train_model_cml.py
 
       # 7. Assemble a Markdown report and post it as a PR comment.
       #
